@@ -15,10 +15,17 @@ body {
   padding: 0 6rem;
 }
 
+.moon {
+  display: flex;
+  justify-content: center;
+}
+
+.fa-moon,
 .fa-book,
 .fa-star,
 .fa-cloud-moon {
   font-size: 3rem;
+  padding: 1rem;
 }
 
 .icon-container {
@@ -26,4 +33,83 @@ body {
   color: white;
   display: flex;
   justify-content: space-evenly;
+}
+
+.container {
+  background-color: #244a80;
+  color: white;
+}
+
+.weather-title {
+  text-align: center;
+  font-family: "Abhaya Libre", serif;
+  font-weight: 600;
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.weather-title > h2 {
+  font-family: "Open Sans", sans-serif;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-1,
+.card-2,
+.card-3 {
+  display: inline-block;
+  border: 1px solid white;
+  border-radius: 1rem;
+  background-color: #1a2653;
+  padding-left: 1rem;
+  margin: 1rem;
+}
+
+.card-1,
+.card-2 {
+  min-width: 25%;
+}
+
+.card-3 {
+  min-width: 50%;
+}
+
+.zip-code-container {
+  justify-content: center;
+  display: flex;
+}
+
+.zip-code {
+  border-radius: 0.4rem;
+  border: 1px solid grey;
+  text-align: center;
+  height: 2.5rem;
+  width: 10rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+}
+
+.zip-code-error {
+  border-radius: 0.4rem;
+  border: 3px solid red;
+  text-align: center;
+  height: 2.5rem;
+  width: 10rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+  color: red;
+}
+
+h3 {
+  display: inline-block;
+  font-family: "Abhaya Libre", serif;
+}
+
+p {
+  display: inline-block;
+  font-family: "open Sans", sans-serif;
+  font-weight: light;
 }
