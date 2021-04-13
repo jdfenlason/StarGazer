@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
+/* global weatherData */
+/* global astronomyData */
+
 var $zipCodeInput = document.querySelector('.zip-code');
 var $weatherHomeBtn = document.querySelector('#weather-home-button');
-var weatherData = {};
 
 $zipCodeInput.addEventListener('keyup', enterZip);
 $weatherHomeBtn.addEventListener('click', weatherHomeClick);
@@ -37,16 +39,19 @@ function getWeatherData() {
   });
   xhr.send();
 }
+
+function getAstronomyData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    'GET',
+    'https://api.ipgeolocation.io/astronomy?apiKey=269e58c8ced7450593d0b670723b7b18&location=san&diego'
+  );
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    astronomyData.dayLength = xhr.response.day_length;
+    astronomyData.moon_distance = Math.floor(xhr.response.moon_distance);
+  });
+  xhr.send();
+}
+getAstronomyData();
 getWeatherData();
-
-// function getAstronomyData() {
-//    var xhr = new XMLHttpRequest();
-//   xhr.open(
-//     'GET',
-//     ''
-//   );
-//   xhr.responseType = 'json';
-//   xhr.addEventListener('load', function () {
-//     console.log(xhr.response);
-
-// }
