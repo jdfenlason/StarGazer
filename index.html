@@ -12,7 +12,7 @@
     />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@600&family=Open+Sans&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@600&family=Open+Sans:wght@300&display=swap"
       rel="stylesheet"
     />
     <link rel="icon" href="images/favicon.ico" />
@@ -25,19 +25,22 @@
       <div class="row">
         <div class="column-full">
           <div class="header-container">
-            <h1>StarGazer</h1>
+            <h2>StarGazer</h2>
             <i class="fas fa-cloud-moon"></i>
           </div>
         </div>
       </div>
     </header>
     <main>
-      <div class="container">
+      <div class="container" data-view="weather">
         <div class="row">
           <div class="column-full">
-            <div class="weather-title">
-              <h1>Weather</h1>
-              <h2>92128</h2>
+            <div class="weather-container">
+              <div class="weather-title">
+                <h1>Weather:</h1>
+              </div>
+              <h1>92128</h1>
+              <h2>32.7157&deg; N, 32.7157&deg; W</h2>
             </div>
           </div>
         </div>
@@ -45,20 +48,24 @@
           <div class="column-full">
             <div class="card-container">
               <div class="card-1">
-                  <h3>Date:</h3> <p>4/13/2021</p>
-                <br>
-                <h3>Time:</h3> <p>12:30</p>
-                <br>
-                <h3>LAT/LON:</h3> <p>
-                  -122121/ -12222
-                </p>
+                <h3>Date:</h3>
+                <p>4/13/2021</p>
+                <br />
+                <h3>Time:</h3>
+                <p>12:30</p>
+                <br />
+                <h3>Day length:</h3>
+                <p>12:00</p>
               </div>
               <div class="card-2">
-                <h3>Temp:</h3> <p> 72 &deg;</p>
-                <br>
-                <h3>Feels Like:</h3> <p>73 &deg;</p>
-               <br>
-                <h3>Wind: </h3> <p>1 Mph</p>
+                <h3>Temp:</h3>
+                <p>72 &deg;</p>
+                <br />
+                <h3>Feels Like:</h3>
+                <p>73 &deg;</p>
+                <br />
+                <h3>Wind:</h3>
+                <p>1 Mph</p>
               </div>
             </div>
           </div>
@@ -67,41 +74,44 @@
           <div class="column-full">
             <div class="card-container">
               <div class="card-3">
-                <h3>Moonrise</h3> <p>8:19</p>
-                <br>
+                <h3>Moonrise</h3>
+                <p>8:19</p>
+                <br />
 
-              <h3>Sunset</h3> <p>8:19</p>
-              <br>
-              <h3>Moonset</h3> <p>8:19</p>
-              <br>
-              <h3>Moon Distance</h3> <p>8:19</p>
+                <h3>Sunset</h3>
+                <p>8:19</p>
+                <br />
+                <h3>Moonset</h3>
+                <p>8:19</p>
+                <br />
+                <h3>Moon Distance</h3>
+                <p>8:19</p>
               </div>
             </div>
           </div>
         </div>
         <div class="row">
-          <div class ="column-full">
-            <div class = "zip-code-container">
-                <input type="text" placeholder="ZIPCODE" class="zip-code">
-              </div>
-              <div class= "moon">
-                <i class="fas fa-moon invisible"></i>
-              </div>
+          <div class="column-full">
+            <div class="zip-code-container">
+              <input type="text" placeholder="ZIPCODE" class="zip-code" />
+            </div>
+            <div class="moon">
+              <i class="fas fa-moon invisible"></i>
+            </div>
           </div>
         </div>
       </div>
-    </main>
-    <footer>
       <div class="row">
         <div class="column-full">
           <div class="icon-container">
             <i class="fas fa-book"></i>
-            <i id= "weather-home-button" class="fas fa-cloud-moon"></i>
+            <i id="weather-home-button" class="fas fa-cloud-moon"></i>
             <i class="fas fa-star"></i>
           </div>
         </div>
       </div>
-    </footer>
+    </main>
+
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
   </body>
