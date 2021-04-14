@@ -5,7 +5,7 @@ var $zipCodeInput = document.querySelector('.zip-code');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
 $zipCodeInput.addEventListener('keyup', enterZip);
-window.addEventListener('keyup', submit);
+window.addEventListener('keypress', submit);
 
 function enterZip(event) {
   if ($zipCodeInput.value.length > 5) {
