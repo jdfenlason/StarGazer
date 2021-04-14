@@ -3,28 +3,33 @@
 /* global astronomyData */
 
 var $zipCodeInput = document.querySelector('.zip-code');
-var $weatherHomeBtn = document.querySelector('#weather-home-button');
+// var $weatherHomeBtn = document.querySelector('#weather-home-button');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
 
-function weatherHomeClick(event) {}
 $zipCodeInput.addEventListener('keyup', enterZip);
-$weatherHomeBtn.addEventListener('click', weatherHomeClick);
+// $weatherHomeBtn.addEventListener('click', weatherHomeClick);
 window.addEventListener('keyup', submit);
 
 function enterZip(event) {
-  astronomyData.zipCode = $zipCodeInput.value;
-  weatherData.zipCode = $zipCodeInput.value;
   $zipCodeTitle.textContent = $zipCodeInput.value;
-}
-
-function submit(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
+  if ($zipCodeInput.value.length > 5) {
+    $zipCodeInput.className = 'zip-code-error';
+  }
+  if ($zipCodeInput.value.length <= 5) {
+    $zipCodeInput.className = 'zip-code';
+    astronomyData.zipCode = $zipCodeInput.value;
+    weatherData.zipCode = $zipCodeInput.value;
     getWeatherData();
     getAstronomyData();
   }
 }
 
+function submit(event) {
+  if (event.key === 'Enter') {
+    renderData();
+    $zipCodeInput.value = null;
+  }
+}
 function getWeatherData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
@@ -32,8 +37,7 @@ function getWeatherData() {
     'http://api.weatherapi.com/v1/forecast.json?key=747120ab42924582925172532211204&q=' + weatherData.zipCode + '&days=1&aqi=no&alerts=no');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    console.log(xhr.response);
-    weatherData.latlon = xhr.response.location.lat + '° N' + '  ' + xhr.response.location.lon + '° W';
+    weatherData.latlon = xhr.response.location.lat + '° N, ' + '    ' + xhr.response.location.lon + '° W';
     weatherData.time = xhr.response.location.localtime.slice(11, 16);
     weatherData.date = xhr.response.location.localtime.slice(6, 10) + '-2021';
     weatherData.temp = xhr.response.current.temp_f + '°';
@@ -52,7 +56,7 @@ function getAstronomyData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     'GET',
-    'https://api.ipgeolocation.io/astronomy?apiKey=269e58c8ced7450593d0b670723b7b18&location=new&york');
+    'https://api.ipgeolocation.io/astronomy?apiKey=269e58c8ced7450593d0b670723b7b18&location=usa');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     astronomyData.dayLength = xhr.response.day_length;
@@ -62,6 +66,7 @@ function getAstronomyData() {
 }
 
 function renderData() {
+  $zipCodeTitle.textContent = $zipCodeInput.value;
   var $latitude = document.querySelector('.latitude');
   $latitude.textContent = weatherData.latlon;
   var $date = document.querySelector('.date');
@@ -85,11 +90,9 @@ function renderData() {
   var $moonIll = document.querySelector('.moonIll');
   $moonIll.textContent = weatherData.moon_illumination;
   var $dayLength = document.querySelector('.dayLength');
-  $dayLength.textContent = astronomyData.dayLength + ' Hrs.';
+  $dayLength.textContent = astronomyData.dayLength + ' HRS.';
   var $moonDistance = document.querySelector('.moon-distance');
   $moonDistance.textContent = astronomyData.moon_distance + ' Miles';
 }
 
-window.addEventListener('DOMContentLoaded', function () {
-  renderData();
-});
+window.addEventListener('DOMContentLoaded', renderData);

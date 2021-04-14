@@ -120,3 +120,11 @@
   font-size: 1.5em;
   color: red;
 }
+
+.fa-moon {
+  transition: 0.5s ease-in-out;
+}
+
+.loading {
+  transform: rotate(-360deg);
+}
