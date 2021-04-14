@@ -21,7 +21,7 @@ function enterZip(event) {
 function submit(event) {
   if (
     event.key === 'Enter' &&
-    Number($zipCodeInput.value)
+    Number($zipCodeInput.value && weatherData.zipCode !== null)
   ) {
     $loading.className = 'fas fa-moon loading';
     setTimeout(spinIcon, 1000);
@@ -111,5 +111,4 @@ function renderData() {
   $dayLength.textContent = astronomyData.dayLength + ' HRS.';
   var $moonDistance = document.querySelector('.moon-distance');
   $moonDistance.textContent = astronomyData.moon_distance + ' Miles';
-  window.addEventListener('DOMContentLoaded', renderData);
 }
