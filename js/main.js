@@ -15,17 +15,17 @@ function enterZip(event) {
     $zipCodeInput.className = 'zip-code';
     astronomyData.zipCode = $zipCodeInput.value;
     weatherData.zipCode = $zipCodeInput.value;
-    getWeatherData();
-    getAstronomyData();
   }
 }
 
 function submit(event) {
-  if (event.key === 'Enter' && Number($zipCodeInput.value)) {
+  if (
+    event.key === 'Enter' &&
+    Number($zipCodeInput.value)
+  ) {
     $loading.className = 'fas fa-moon loading';
     setTimeout(spinIcon, 1000);
-    renderData();
-    $zipCodeInput.value = null;
+    getWeatherData();
   }
 }
 
@@ -62,6 +62,7 @@ function getWeatherData() {
       xhr.response.forecast.forecastday[0].astro.moon_phase;
     weatherData.moon_illumination =
       xhr.response.forecast.forecastday[0].astro.moon_illumination;
+    getAstronomyData();
   });
   xhr.send();
 }
@@ -70,18 +71,20 @@ function getAstronomyData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     'GET',
-    'https://api.ipgeolocation.io/astronomy?apiKey=269e58c8ced7450593d0b670723b7b18&location=usa'
+    'https://api.ipgeolocation.io/astronomy?apiKey=269e58c8ced7450593d0b670723b7b18&location=US'
   );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     astronomyData.dayLength = xhr.response.day_length;
     astronomyData.moon_distance = Math.floor(xhr.response.moon_distance);
+    renderData();
   });
   xhr.send();
 }
 
 function renderData() {
   $zipCodeTitle.textContent = $zipCodeInput.value;
+  $zipCodeInput.value = null;
   var $latitude = document.querySelector('.latitude');
   $latitude.textContent = weatherData.latlon;
   var $date = document.querySelector('.date');
@@ -108,6 +111,5 @@ function renderData() {
   $dayLength.textContent = astronomyData.dayLength + ' HRS.';
   var $moonDistance = document.querySelector('.moon-distance');
   $moonDistance.textContent = astronomyData.moon_distance + ' Miles';
+  window.addEventListener('DOMContentLoaded', renderData);
 }
-
-window.addEventListener('DOMContentLoaded', renderData);
