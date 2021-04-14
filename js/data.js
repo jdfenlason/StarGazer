@@ -1,4 +1,6 @@
-/* exported data */
+/* exported observationData */
+/* exported astronomyData */
+/* exported weatherData */
 var observationData = {
   observations: [],
   editing: null,
@@ -35,7 +37,6 @@ function storeData(event) {
   localStorage.setItem('astronomyData-storage', astronomyDataJSON);
   var weatherDataJSON = JSON.stringify(weatherData);
   localStorage.setItem('weatherData-storage', weatherDataJSON);
-
 }
 
 window.addEventListener('beforeunload', storeData);

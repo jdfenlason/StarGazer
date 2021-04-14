@@ -1,21 +1,17 @@
-/* eslint-disable no-console */
 /* global weatherData */
 /* global astronomyData */
 
 var $zipCodeInput = document.querySelector('.zip-code');
-// var $weatherHomeBtn = document.querySelector('#weather-home-button');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
-
+var $loading = document.querySelector('.fa-moon');
 $zipCodeInput.addEventListener('keyup', enterZip);
-// $weatherHomeBtn.addEventListener('click', weatherHomeClick);
 window.addEventListener('keyup', submit);
 
 function enterZip(event) {
-  $zipCodeTitle.textContent = $zipCodeInput.value;
   if ($zipCodeInput.value.length > 5) {
     $zipCodeInput.className = 'zip-code-error';
   }
-  if ($zipCodeInput.value.length <= 5) {
+  if ($zipCodeInput.value.length === 5) {
     $zipCodeInput.className = 'zip-code';
     astronomyData.zipCode = $zipCodeInput.value;
     weatherData.zipCode = $zipCodeInput.value;
@@ -25,29 +21,47 @@ function enterZip(event) {
 }
 
 function submit(event) {
-  if (event.key === 'Enter') {
+  if (event.key === 'Enter' && Number($zipCodeInput.value)) {
+    $loading.className = 'fas fa-moon loading';
+    setTimeout(spinIcon, 1000);
     renderData();
     $zipCodeInput.value = null;
   }
 }
+
+function spinIcon() {
+  $loading.className = 'fas fa-moon invisible';
+}
+
 function getWeatherData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     'GET',
-    'http://api.weatherapi.com/v1/forecast.json?key=747120ab42924582925172532211204&q=' + weatherData.zipCode + '&days=1&aqi=no&alerts=no');
+    'http://api.weatherapi.com/v1/forecast.json?key=747120ab42924582925172532211204&q=' +
+      weatherData.zipCode +
+      '&days=1&aqi=no&alerts=no'
+  );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    weatherData.latlon = xhr.response.location.lat + '° N, ' + '    ' + xhr.response.location.lon + '° W';
+    weatherData.latlon =
+      xhr.response.location.lat +
+      '° N, ' +
+      ' ' +
+      xhr.response.location.lon +
+      '° W';
     weatherData.time = xhr.response.location.localtime.slice(11, 16);
     weatherData.date = xhr.response.location.localtime.slice(6, 10) + '-2021';
     weatherData.temp = xhr.response.current.temp_f + '°';
     weatherData.feels = xhr.response.current.feelslike_f + '°';
-    weatherData.wind = xhr.response.current.wind_mph + ' ' + xhr.response.current.wind_dir;
+    weatherData.wind =
+      xhr.response.current.wind_mph + ' ' + xhr.response.current.wind_dir;
     weatherData.moonrise = xhr.response.forecast.forecastday[0].astro.moonrise;
     weatherData.sunset = xhr.response.forecast.forecastday[0].astro.sunset;
     weatherData.moonset = xhr.response.forecast.forecastday[0].astro.moonset;
-    weatherData.moon_phase = xhr.response.forecast.forecastday[0].astro.moon_phase;
-    weatherData.moon_illumination = xhr.response.forecast.forecastday[0].astro.moon_illumination;
+    weatherData.moon_phase =
+      xhr.response.forecast.forecastday[0].astro.moon_phase;
+    weatherData.moon_illumination =
+      xhr.response.forecast.forecastday[0].astro.moon_illumination;
   });
   xhr.send();
 }
@@ -56,7 +70,8 @@ function getAstronomyData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     'GET',
-    'https://api.ipgeolocation.io/astronomy?apiKey=269e58c8ced7450593d0b670723b7b18&location=usa');
+    'https://api.ipgeolocation.io/astronomy?apiKey=269e58c8ced7450593d0b670723b7b18&location=usa'
+  );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     astronomyData.dayLength = xhr.response.day_length;

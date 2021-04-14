@@ -14,3 +14,20 @@
 .column-third {
   flex-basis: calc(100% / 3);
 }
+
+.card-1,
+.card-2 {
+  min-width: 25%;
+}
+
+.card-3 {
+  min-width: 54%;
+}
+
+@media screen and (min-width: 320px) {
+  .card-1,
+  .card-2,
+  .card-3 {
+    padding: 0.6rem;
+  }
+}
