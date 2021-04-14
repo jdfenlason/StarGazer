@@ -14,7 +14,7 @@ var weatherData = {
 
 var previousobservationDataJSON = localStorage.getItem('observationData-storage');
 var previousAstronomyDataJSON = localStorage.getItem('astronomyData-storage');
-var previousWeatherDataJSON = localStorage.getItem('astronomyData-storage');
+var previousWeatherDataJSON = localStorage.getItem('weatherData-storage');
 
 if (previousobservationDataJSON !== null) {
   observationData = JSON.parse(previousobservationDataJSON);

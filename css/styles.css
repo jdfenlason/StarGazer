@@ -54,6 +54,7 @@
   line-height: 3.5rem;
   align-items: center;
   padding: 1rem;
+  font-size: 1.5rem;
 }
 
 .weather-title {
@@ -74,6 +75,7 @@
   padding: 1rem;
   margin: 1rem;
   line-height: 2rem;
+  font-family: "Abhaya Libre", serif;
 }
 
 .card-1,
@@ -85,8 +87,15 @@
   min-width: 50%;
 }
 
+.card-1 > span,
+.card-2 > span,
+.card-3 > span {
+  font-family: "Open Sans", sans-serif;
+}
+
 .zip-code-container {
   justify-content: center;
+  align-items: center;
   display: flex;
   margin: 1rem;
 }
@@ -110,15 +119,4 @@
   font-family: "Open Sans", sans-serif;
   font-size: 1.5em;
   color: red;
-}
-
-h3 {
-  display: inline-block;
-  font-family: "Abhaya Libre", serif;
-}
-
-p {
-  display: inline-block;
-  font-family: "open Sans", sans-serif;
-  font-weight: light;
 }
