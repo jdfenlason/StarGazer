@@ -13,16 +13,21 @@ var $footerMoonIcon = document.querySelector('#moon-footer');
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
 var recordObv = document.querySelector('.observation-form');
+var $newButton = document.querySelector('.new-button');
 
 var $imageUrl = document.querySelector('.image-url');
 var $userPhotoUrl = document.querySelector('#user-photoUrl');
-
+$newButton.addEventListener('click', newClick);
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
 $footerBookIcon.addEventListener('click', bookClick);
 $footerMoonIcon.addEventListener('click', moonClick);
 recordObv.addEventListener('submit', saveObvs);
 $userPhotoUrl.addEventListener('input', imageUpdate);
+
+function newClick() {
+  $observationView.className = 'hidden observation-container';
+}
 
 function saveObvs(event) {
   event.preventDefault();
