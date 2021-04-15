@@ -4,12 +4,24 @@
 var $zipCodeInput = document.querySelector('.zip-code');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
-var $bookIcon = document.querySelector('.fa-book');
+var $headerBookIcon = document.querySelector('#book-header');
+var $footerBookIcon = document.querySelector('#book-footer');
+var $headerMoonIcon = document.querySelector('#header-moon');
+var $footerMoonIcon = document.querySelector('#moon-footer');
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
 
-$bookIcon.addEventListener('click', obvPage);
-function obvPage(event) {
+$footerBookIcon.addEventListener('click', bookClick);
+$footerMoonIcon.addEventListener('click', moonClick);
+
+function bookClick(event) {
+  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
+  $headerBookIcon.className = 'fas fa-book';
+}
+
+function moonClick(event) {
+  $headerBookIcon.className = 'fas fa-book hidden';
+  $headerMoonIcon.className = 'fas fa-cloud-moon';
 }
 
 function enterZip(event) {
