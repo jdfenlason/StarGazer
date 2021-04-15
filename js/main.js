@@ -1,6 +1,8 @@
 /* global weatherData */
 /* global astronomyData */
 /* global nasaData */
+/* global observationData */
+
 var $zipCodeInput = document.querySelector('.zip-code');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
@@ -10,11 +12,42 @@ var $headerMoonIcon = document.querySelector('#header-moon');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
+var recordObv = document.querySelector('.observation-form');
+
+var $imageUrl = document.querySelector('.image-url');
+var $userPhotoUrl = document.querySelector('#user-photoUrl');
 
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
 $footerBookIcon.addEventListener('click', bookClick);
 $footerMoonIcon.addEventListener('click', moonClick);
+recordObv.addEventListener('submit', saveObvs);
+$userPhotoUrl.addEventListener('input', imageUpdate);
+
+function imageUpdate(event) {
+  var newImage = event.target.value;
+  $imageUrl.setAttribute('src', newImage);
+}
+
+function saveObvs(event) {
+  event.preventDefault();
+  if (observationData.editing === null) {
+    var userInput = {};
+    userInput.zipcode = recordObv.elements.zipcode.value;
+    userInput.location = recordObv.elements.location.value;
+    userInput.date = recordObv.elements.date.value;
+    userInput.time = recordObv.elements.time.value;
+    userInput.lunarPhase = recordObv.elements.lunarPhase.value;
+    userInput.image = recordObv.elements.photo.value;
+    userInput.observations = recordObv.elements.observations.value;
+    observationData.observations.unshift(userInput);
+    userInput.nextObvId = observationData.nextObvId;
+    observationData.nextObvId++;
+  }
+  $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
+  recordObv.reset();
+  observationData.editing = null;
+}
 
 function bookClick(event) {
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
@@ -169,10 +202,11 @@ function renderData() {
   var lunarPhase = document.querySelector('#lunarPhase');
   lunarPhase.value = weatherData.moon_phase;
 
-  var imageurl = document.querySelector('#image-url');
+  var imageurl = document.querySelector('#user-photoUrl');
   imageurl.value = nasaData.image;
+  $imageUrl.setAttribute('src', nasaData.image);
 
-  nasaData.image = null;
   $zipCodeInput.value = null;
   spinIcon();
+
 }
