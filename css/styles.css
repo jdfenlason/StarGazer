@@ -1,0 +1,128 @@
+.invisible {
+  visibility: hidden;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  font-family: "Abhaya Libre", serif;
+  font-size: 1.5em;
+  background-color: #1a2653;
+  color: white;
+}
+
+.moon {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+#weather-home-button:hover {
+  cursor: pointer;
+}
+
+.fa-moon {
+  font-size: 3rem;
+}
+
+.fa-book,
+.fa-star,
+.fa-cloud-moon {
+  font-size: 3rem;
+  padding: 1rem;
+}
+
+.icon-container {
+  background-color: #1a2653;
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0;
+}
+
+.container {
+  background-color: #244a80;
+  color: white;
+}
+
+.weather-container {
+  font-family: "Open Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  line-height: 2.5rem;
+  align-items: center;
+  font-size: 1.5rem;
+}
+
+.weather-title {
+  font-family: "Abhaya Libre", serif;
+  font-size: 0.6em;
+  padding: 0;
+  margin: 0;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+}
+
+.card-1,
+.card-2,
+.card-3 {
+  border: 1px solid white;
+  border-radius: 1rem;
+  background-color: #1a2653;
+  padding: 1rem;
+  margin: 1rem;
+  line-height: 0.5rem;
+  font-family: "Abhaya Libre", serif;
+}
+
+.card-1 > span,
+.card-2 > span,
+.card-3 > span {
+  font-family: "Open Sans", sans-serif;
+}
+
+.zip-code-container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 1rem;
+}
+
+.zip-code {
+  border-radius: 0.4rem;
+  border: 1px solid grey;
+  text-align: center;
+  height: 2.5rem;
+  width: 10rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+}
+
+.zip-code-error {
+  border-radius: 0.4rem;
+  border: 3px solid red;
+  text-align: center;
+  height: 2.5rem;
+  width: 10rem;
+  font-family: "Open Sans", sans-serif;
+  font-size: 1.5em;
+  color: red;
+}
+
+.loading {
+  animation: loading 1s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
