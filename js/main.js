@@ -103,21 +103,31 @@ function createObservation(observation) {
   var flipContainer = document.createElement('div');
   flipContainer.setAttribute('class', 'flip-card-container');
 
+  var flipCard = document.createElement('div');
+  flipCard.setAttribute('class', flipCard);
+
+  var flipfront = document.createElement('div');
+  flipfront.setAttribute('class', 'image-container');
+  flipfront.setAttribute('id', 'flip-card-front');
+
   var img = document.createElement('img');
   img.setAttribute('src', observation.image);
   img.setAttribute('class', 'image-url');
 
+  var flipback = document.createElement('div');
+  flipback.setAttribute('class', 'flip-card-back');
+
   var observationheader = document.createElement('div');
-  observationheader.setAttribute('class', 'entry-header');
+  observationheader.setAttribute('class', 'observation-header');
   var h2 = document.createElement('h2');
   h2.setAttribute('class', 'post-title');
-  h2.textContent = observation.title;
+  h2.textContent = observation.location;
 
   var editIcon = document.createElement('i');
   editIcon.setAttribute('class', 'fas fa-edit');
 
   var pElement = document.createElement('p');
-  pElement.textContent = observation.observation;
+  pElement.textContent = observation.observations;
 
   observationheader.appendChild(h2);
   observationheader.appendChild(editIcon);
