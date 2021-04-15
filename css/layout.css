@@ -31,3 +31,13 @@
     padding: 0.6rem;
   }
 }
+
+@media screen and (max-width: 720px) {
+  .image-container {
+    width: 100%;
+  }
+
+  .column-half {
+    width: 100%;
+  }
+}

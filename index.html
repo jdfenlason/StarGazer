@@ -114,74 +114,72 @@
       </div>
 
       <div class="observation-container" data-view="observations">
-        <div class="row">
-          <div class="column-full">
-            <div class="form-container">
-              <form class="observation-form">
-                <div class="column-full">
-                  <div class="column-half form-container">
-                    <input
-                      type="text"
-                      name="zipcode"
-                      placeholder="zipcode"
-                      id="zipcode"
-                    />
-                    <input
-                      type="text"
-                      name="location"
-                      placeholder="location"
-                      id="location"
-                    />
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="image-container column-half"></div>
-
-                  <div class="column-half form-container">
-                    <input type="text" name="Lat" placeholder="Lat" id="Lat" />
-                    <input
-                      type="text"
-                      name="Long"
-                      placeholder="Long"
-                      id="Long"
-                    />
-                  </div>
-                </div>
-                <div class="date-time">
-                  <input type="text" name="Date" placeholder="Date" id="Date" />
-                  <input type="text" name="Time" placeholder="Time" id="Time" />
-                  <input
-                    type="text"
-                    name="Conditions"
-                    placeholder="Conditions"
-                    id="Conditions"
-                  />
-                </div>
-
-                <div class="observations">
-                  <input
-                    type="text"
-                    name="LunarPhase"
-                    placeholder="LunarPhase"
-                    id="LunarPhase"
-                  />
-                  <input
-                    type="text"
-                    name="Equipment"
-                    placeholder="Equipment"
-                    id="Equipment"
-                  />
-                  <input
-                    type="text"
-                    name="Observations"
-                    placeholder="Observations"
-                    id="Observations"
-                  />
-                </div>
-              </form>
-            </div>
+        <form class="observation-form">
+          <div class="column-full form-container">
+            <h1 class="observation-title">Observations:</h1>
           </div>
-        </div>
+
+          <div class="row">
+            <div class="image-container column-half">
+              <img
+                class="image-url"
+                src="images/placeholder.jpeg"
+                alt="stars"
+              />
+            </div>
+            <div class="column-half form-container">
+              <label for="zipcode">ZIPCODE</label>
+              <input
+                type="text"
+                name="zipcode"
+                placeholder="zipcode"
+                id="zipcode"
+              />
+              <label for="location">LOCATION</label>
+              <input
+                required
+                type="text"
+                name="location"
+                placeholder="location"
+                id="location"
+              />
+               <label for="date">Date</label>
+              <input type="text" name="date" placeholder="date" id="date" />
+               <label for="time">time</label>
+              <input type="text" name="time" placeholder="time" id="time" />
+               <label for="lunarPhase">LunarPhase</label>
+              <input
+                type="text"
+                name="lunarPhase"
+                placeholder="Lunar Phase"
+                id="lunarPhase"
+              />
+            </div>
+
+            <div class="column-full form-container">
+                <label for="image-url">Image-url</label>
+              <input
+                required
+                type="url"
+                name="image"
+                placeholder="Image-url"
+                id="image-url"
+              />
+              <label for="observations">observations</label>
+              <textarea
+                required
+                placeholder="Observations"
+                name="observations"
+                rows="7"
+                type="text"
+                id="observations"
+              ></textarea>
+            </div>
+            <div class="column-full form-submit">
+                <button class="record-button" type="submit">RECORD</button>
+              </div>
+          </div>
+        </form>
       </div>
 
       <div class="row">

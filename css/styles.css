@@ -135,23 +135,6 @@
   }
 }
 
-.observations {
-  display: flex;
-  flex-direction: column;
-  width: 70%;
-  align-items: center;
-}
-
-.location {
-  display: flex;
-  justify-content: center;
-}
-
-.date-time {
-  display: flex;
-  justify-content: space-around;
-}
-
 input,
 textarea {
   border-radius: 0.25rem;
@@ -175,11 +158,53 @@ input {
 .image-container {
   margin-bottom: 0.65rem;
   padding: 0 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .image-url {
   width: 100%;
+  object-fit: contain;
+}
+
+.observation-title {
+  text-align: center;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+label {
+  text-transform: uppercase;
+  font-family: "Abhaya Libre", serif;
+  color: white;
+  padding: 0.3rem 0;
+}
+
+input:focus,
+textarea:focus {
+  border: 1px solid #1a2653;
+  outline: none;
+}
+
+.column-full.form-submit {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 0 1.1rem;
+}
+
+.record-button {
+  font-family: "Open Sans", sans-serif;
+  border-radius: 0.3rem;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+  font-size: 1em;
+  color: white;
+  background-color: #1a2653;
+  margin-top: 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.record-button:hover {
+  cursor: pointer;
 }

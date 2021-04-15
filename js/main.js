@@ -10,10 +10,9 @@ var $headerMoonIcon = document.querySelector('#header-moon');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
-var $imageContainer = document.querySelector('.image-container');
+
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
-
 $footerBookIcon.addEventListener('click', bookClick);
 $footerMoonIcon.addEventListener('click', moonClick);
 
@@ -64,12 +63,8 @@ function getWeatherData() {
   );
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    weatherData.latlon =
-      xhr.response.location.lat +
-      '° N, ' +
-      ' ' +
-      xhr.response.location.lon +
-      '° W';
+    weatherData.lat = xhr.response.location.lat;
+    weatherData.lon = xhr.response.location.lon;
     weatherData.time = xhr.response.location.localtime.slice(11, 16);
     weatherData.date = xhr.response.location.localtime.slice(6, 10) + '-2021';
     weatherData.temp = xhr.response.current.temp_f + '°';
@@ -83,6 +78,7 @@ function getWeatherData() {
       xhr.response.forecast.forecastday[0].astro.moon_phase;
     weatherData.moon_illumination =
       xhr.response.forecast.forecastday[0].astro.moon_illumination;
+    weatherData.city = xhr.response.location.name;
     getAstronomyData();
   });
   xhr.send();
@@ -118,36 +114,65 @@ function getNasaData() {
 
 function renderData() {
   $zipCodeTitle.textContent = $zipCodeInput.value;
-  $zipCodeInput.value = null;
+
+  var zipcode = document.querySelector('#zipcode');
+  zipcode.value = weatherData.zipCode;
+
   var $latitude = document.querySelector('.latitude');
-  $latitude.textContent = weatherData.latlon;
+  $latitude.textContent = weatherData.lat + '° N, ' + ' ' + weatherData.lon + '° W';
+
   var $date = document.querySelector('.date');
   $date.textContent = weatherData.date;
+
   var $time = document.querySelector('.time');
   $time.textContent = weatherData.time;
+
   var $temp = document.querySelector('.temp');
   $temp.textContent = weatherData.temp;
+
   var $feels = document.querySelector('.feels');
   $feels.textContent = weatherData.feels;
+
   var $wind = document.querySelector('.wind');
   $wind.textContent = weatherData.wind;
+
   var $moonrise = document.querySelector('.moonrise');
   $moonrise.textContent = weatherData.moonrise;
+
   var $sunset = document.querySelector('.sunset');
   $sunset.textContent = weatherData.sunset;
+
   var $moonset = document.querySelector('.moonset');
   $moonset.textContent = weatherData.moonset;
+
   var $moonphase = document.querySelector('.moonphase');
   $moonphase.textContent = weatherData.moon_phase;
+
   var $moonIll = document.querySelector('.moonIll');
   $moonIll.textContent = weatherData.moon_illumination;
+
   var $dayLength = document.querySelector('.dayLength');
   $dayLength.textContent = astronomyData.dayLength + ' HRS.';
+
   var $moonDistance = document.querySelector('.moon-distance');
   $moonDistance.textContent = astronomyData.moon_distance + ' Miles';
-  var $img = document.createElement('img');
-  $img.setAttribute('src', nasaData.image);
-  $img.setAttribute('class', 'image-url');
-  $imageContainer.appendChild($img);
+
+  var location = document.querySelector('#location');
+  location.value = weatherData.city;
+
+  var date = document.querySelector('#date');
+  date.value = weatherData.date;
+
+  var time = document.querySelector('#time');
+  time.value = weatherData.time;
+
+  var lunarPhase = document.querySelector('#lunarPhase');
+  lunarPhase.value = weatherData.moon_phase;
+
+  var imageurl = document.querySelector('#image-url');
+  imageurl.value = nasaData.image;
+
+  nasaData.image = null;
+  $zipCodeInput.value = null;
   spinIcon();
 }
