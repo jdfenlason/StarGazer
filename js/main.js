@@ -17,20 +17,17 @@ function enterZip(event) {
     weatherData.zipCode = $zipCodeInput.value;
   }
 }
-
+function spinIcon() {
+  $loading.className = 'fas fa-moon invisible';
+}
 function submit(event) {
   if (
     event.key === 'Enter' &&
     Number($zipCodeInput.value && weatherData.zipCode !== null)
   ) {
     $loading.className = 'fas fa-moon loading';
-    setTimeout(spinIcon, 1000);
     getWeatherData();
   }
-}
-
-function spinIcon() {
-  $loading.className = 'fas fa-moon invisible';
 }
 
 function getWeatherData() {
@@ -111,4 +108,5 @@ function renderData() {
   $dayLength.textContent = astronomyData.dayLength + ' HRS.';
   var $moonDistance = document.querySelector('.moon-distance');
   $moonDistance.textContent = astronomyData.moon_distance + ' Miles';
+  spinIcon();
 }
