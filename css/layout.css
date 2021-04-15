@@ -31,3 +31,27 @@
     padding: 0.6rem;
   }
 }
+
+@media screen and (min-width: 720px) {
+  .header-container {
+    justify-content: space-between;
+  }
+
+  .header-container > i {
+    margin-right: 1rem;
+  }
+
+  .header-container > h2 {
+    margin-left: 2rem;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .image-container {
+    width: 100%;
+  }
+
+  .column-half {
+    width: 100%;
+  }
+}
