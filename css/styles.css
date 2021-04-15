@@ -8,6 +8,7 @@
 
 .observation-container {
   background-color: #244a80;
+  margin: 0, auto;
 }
 
 .header-container {
@@ -172,10 +173,11 @@ input {
 }
 
 .observation-title {
-  text-align: center;
   color: white;
-  margin-top: 1rem;
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 1.5rem;
 }
 
 label {
@@ -199,6 +201,7 @@ textarea:focus {
   margin: 0 1.1rem;
 }
 
+.new-button,
 .record-button {
   font-family: "Open Sans", sans-serif;
   border-radius: 0.3rem;
@@ -211,6 +214,7 @@ textarea:focus {
   margin-bottom: 0.85rem;
 }
 
+.new-button,
 .record-button:hover {
   cursor: pointer;
 }
