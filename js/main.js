@@ -8,6 +8,8 @@ var $headerBookIcon = document.querySelector('#book-header');
 var $footerBookIcon = document.querySelector('#book-footer');
 var $headerMoonIcon = document.querySelector('#header-moon');
 var $footerMoonIcon = document.querySelector('#moon-footer');
+var $observationView = document.querySelector('.observation-container');
+var $weatherView = document.querySelector('.container');
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
 
@@ -17,11 +19,15 @@ $footerMoonIcon.addEventListener('click', moonClick);
 function bookClick(event) {
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerBookIcon.className = 'fas fa-book';
+  $weatherView.className = 'hidden';
+  $observationView.className = 'observation-container';
 }
 
 function moonClick(event) {
   $headerBookIcon.className = 'fas fa-book hidden';
   $headerMoonIcon.className = 'fas fa-cloud-moon';
+  $observationView.className = 'hidden observation-container';
+  $weatherView.className = 'container';
 }
 
 function enterZip(event) {
