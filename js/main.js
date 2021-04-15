@@ -147,7 +147,8 @@ function renderData() {
   zipcode.value = weatherData.zipCode;
 
   var $latitude = document.querySelector('.latitude');
-  $latitude.textContent = weatherData.lat + '° N, ' + ' ' + weatherData.lon + '° W';
+  $latitude.textContent =
+    weatherData.lat + '° N, ' + ' ' + weatherData.lon + '° W';
 
   var $date = document.querySelector('.date');
   $date.textContent = weatherData.date;
@@ -204,7 +205,6 @@ function renderData() {
   $zipCodeInput.value = null;
   nasaData.image = null;
   spinIcon();
-
 }
 
 function imageUpdate(event) {
