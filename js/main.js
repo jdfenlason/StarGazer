@@ -1,6 +1,6 @@
 /* global weatherData */
 /* global astronomyData */
-
+/* global nasaData */
 var $zipCodeInput = document.querySelector('.zip-code');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
@@ -10,6 +10,7 @@ var $headerMoonIcon = document.querySelector('#header-moon');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
+var $imageContainer = document.querySelector('.image-container');
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
 
@@ -97,6 +98,19 @@ function getAstronomyData() {
   xhr.addEventListener('load', function () {
     astronomyData.dayLength = xhr.response.day_length;
     astronomyData.moon_distance = Math.floor(xhr.response.moon_distance);
+    getNasaData();
+  });
+  xhr.send();
+}
+function getNasaData() {
+  var xhr = new XMLHttpRequest();
+  xhr.open(
+    'GET',
+    'https://api.nasa.gov/planetary/apod?api_key=c39xLCyknC5Yk1SHwmpIVzqHud1ISaewFRDLhIp2'
+  );
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    nasaData.image = xhr.response.hdurl;
     renderData();
   });
   xhr.send();
@@ -131,5 +145,9 @@ function renderData() {
   $dayLength.textContent = astronomyData.dayLength + ' HRS.';
   var $moonDistance = document.querySelector('.moon-distance');
   $moonDistance.textContent = astronomyData.moon_distance + ' Miles';
+  var $img = document.createElement('img');
+  $img.setAttribute('src', nasaData.image);
+  $img.setAttribute('class', 'image-url');
+  $imageContainer.appendChild($img);
   spinIcon();
 }

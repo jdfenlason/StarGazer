@@ -34,139 +34,168 @@
     </header>
     <main>
       <div class="container" data-view="weather">
-
-
-          <div class="row">
-            <div class="column-full">
-              <div class="weather-container">
-                <div class="weather-title">
-                  <h1>Weather:</h1>
-                </div>
-                <div class="zip-code-title"></div>
-                <div class="latitude"></div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <div class="card-container">
-                <div class="card-1">
-                  <h3>Date:</h3>
-                  <span class="date"></span>
-
-                  <br />
-                  <h3>Time:</h3>
-                  <span class="time"></span>
-                  <br />
-                  <h3>Day length:</h3>
-                  <span class="dayLength"></span>
-                </div>
-                <div class="card-2">
-                  <h3>Temp:</h3>
-                  <span class="temp"></span>
-                  <br />
-                  <h3>Feels Like:</h3>
-                  <span class="feels"></span>
-                  <br />
-                  <h3>Wind:</h3>
-                  <span class="wind"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <div class="card-container">
-                <div class="card-3">
-                  <h3>Moonrise:</h3>
-                  <span class="moonrise"></span>
-                  <br />
-
-                  <h3>Sunset:</h3>
-                  <span class="sunset"></span>
-
-                  <br />
-                  <h3>Moonset:</h3>
-                  <span class="moonset"></span>
-                  <br />
-                  <h3>Moon Distance:</h3>
-                  <span class="moon-distance"></span>
-
-                  <br />
-                  <h3>Lunar Phase:</h3>
-                  <span class="moonphase"></span>
-
-                  <br />
-                  <h3>Moon Illumination:</h3>
-                  <span class="moonIll"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="column-full">
-              <div class="zip-code-container">
-                <input type="text" placeholder="ZIPCODE" class="zip-code" />
-              </div>
-              <div class="moon">
-                <i class="fas fa-moon invisible"></i>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="observation-container" data-view="observations">
-          <div class="row">
-            <div class="column-full">
-              <div class="form-container">
-                <form class="observation-form">
-                  <div class="column-full">
-                    <div class="location">
-
-                      <input type="text" name="zipcode" placeholder="zipcode" id="zipcode">
-                      <input type="text" name="location" placeholder="location" id="location">
-                    </div>
-                  </div>
-                  <div class="image-container">
-                    <div class="image">
-                    </div>
-                    <div>
-                      <input type="text" name="Lat" placeholder="Lat" id="Lat">
-                      <input type="text" name="Long" placeholder="Long" id="Long">
-                    </div>
-                  </div>
-                  <div class="date-time">
-
-                    <input type="text" name="Date" placeholder="Date" id="Date">
-                    <input type="text" name="Time" placeholder="Time" id="Time">
-                    <input type="text" name="Conditions" placeholder="Conditions" id="Conditions">
-                  </div>
-
-                  <div class="observations">
-
-                    <input type="text" name="LunarPhase" placeholder="LunarPhase" id="LunarPhase">
-                    <input type="text" name="Equipment" placeholder="Equipment" id="Equipment" >
-                    <input type="text" name="Observations" placeholder="Observations" id="Observations" >
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-
         <div class="row">
           <div class="column-full">
-            <div class="icon-container">
-              <i id="book-footer" class="fas fa-book"></i>
-              <i id="moon-footer" class="fas fa-cloud-moon"></i>
-              <i class="fas fa-star"></i>
+            <div class="weather-container">
+              <div class="weather-title">
+                <h1>Weather:</h1>
+              </div>
+              <div class="zip-code-title"></div>
+              <div class="latitude"></div>
             </div>
           </div>
-
         </div>
-      </main>
+        <div class="row">
+          <div class="column-full">
+            <div class="card-container">
+              <div class="card-1">
+                <h3>Date:</h3>
+                <span class="date"></span>
 
-      <script src="js/data.js"></script>
-      <script src="js/main.js"></script>
-    </body>
-    </html>
+                <br />
+                <h3>Time:</h3>
+                <span class="time"></span>
+                <br />
+                <h3>Day length:</h3>
+                <span class="dayLength"></span>
+              </div>
+              <div class="card-2">
+                <h3>Temp:</h3>
+                <span class="temp"></span>
+                <br />
+                <h3>Feels Like:</h3>
+                <span class="feels"></span>
+                <br />
+                <h3>Wind:</h3>
+                <span class="wind"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <div class="card-container">
+              <div class="card-3">
+                <h3>Moonrise:</h3>
+                <span class="moonrise"></span>
+                <br />
+
+                <h3>Sunset:</h3>
+                <span class="sunset"></span>
+
+                <br />
+                <h3>Moonset:</h3>
+                <span class="moonset"></span>
+                <br />
+                <h3>Moon Distance:</h3>
+                <span class="moon-distance"></span>
+
+                <br />
+                <h3>Lunar Phase:</h3>
+                <span class="moonphase"></span>
+
+                <br />
+                <h3>Moon Illumination:</h3>
+                <span class="moonIll"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column-full">
+            <div class="zip-code-container">
+              <input type="text" placeholder="ZIPCODE" class="zip-code" />
+            </div>
+            <div class="moon">
+              <i class="fas fa-moon invisible"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="observation-container" data-view="observations">
+        <div class="row">
+          <div class="column-full">
+            <div class="form-container">
+              <form class="observation-form">
+                <div class="column-full">
+                  <div class="column-half form-container">
+                    <input
+                      type="text"
+                      name="zipcode"
+                      placeholder="zipcode"
+                      id="zipcode"
+                    />
+                    <input
+                      type="text"
+                      name="location"
+                      placeholder="location"
+                      id="location"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="image-container column-half"></div>
+
+                  <div class="column-half form-container">
+                    <input type="text" name="Lat" placeholder="Lat" id="Lat" />
+                    <input
+                      type="text"
+                      name="Long"
+                      placeholder="Long"
+                      id="Long"
+                    />
+                  </div>
+                </div>
+                <div class="date-time">
+                  <input type="text" name="Date" placeholder="Date" id="Date" />
+                  <input type="text" name="Time" placeholder="Time" id="Time" />
+                  <input
+                    type="text"
+                    name="Conditions"
+                    placeholder="Conditions"
+                    id="Conditions"
+                  />
+                </div>
+
+                <div class="observations">
+                  <input
+                    type="text"
+                    name="LunarPhase"
+                    placeholder="LunarPhase"
+                    id="LunarPhase"
+                  />
+                  <input
+                    type="text"
+                    name="Equipment"
+                    placeholder="Equipment"
+                    id="Equipment"
+                  />
+                  <input
+                    type="text"
+                    name="Observations"
+                    placeholder="Observations"
+                    id="Observations"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="column-full">
+          <div class="icon-container">
+            <i id="book-footer" class="fas fa-book"></i>
+            <i id="moon-footer" class="fas fa-cloud-moon"></i>
+            <i class="fas fa-star"></i>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

@@ -6,7 +6,7 @@
   display: none;
 }
 
-.form-container {
+.observation-container {
   background-color: #244a80;
 }
 
@@ -135,20 +135,6 @@
   }
 }
 
-.image-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.image {
-  width: 50%;
-  height: 300px;
-  background-color: red;
-  margin: 3rem;
-}
-
 .observations {
   display: flex;
   flex-direction: column;
@@ -177,4 +163,23 @@ textarea {
 
 input {
   height: 2rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.image-container {
+  margin-bottom: 0.65rem;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-url {
+  width: 100%;
 }
