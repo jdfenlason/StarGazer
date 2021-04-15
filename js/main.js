@@ -4,8 +4,13 @@
 var $zipCodeInput = document.querySelector('.zip-code');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
+var $bookIcon = document.querySelector('.fa-book');
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
+
+$bookIcon.addEventListener('click', obvPage);
+function obvPage(event) {
+}
 
 function enterZip(event) {
   if ($zipCodeInput.value.length > 5) {
