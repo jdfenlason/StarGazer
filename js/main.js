@@ -24,11 +24,6 @@ $footerMoonIcon.addEventListener('click', moonClick);
 recordObv.addEventListener('submit', saveObvs);
 $userPhotoUrl.addEventListener('input', imageUpdate);
 
-function imageUpdate(event) {
-  var newImage = event.target.value;
-  $imageUrl.setAttribute('src', newImage);
-}
-
 function saveObvs(event) {
   event.preventDefault();
   if (observationData.editing === null) {
@@ -207,6 +202,12 @@ function renderData() {
   $imageUrl.setAttribute('src', nasaData.image);
 
   $zipCodeInput.value = null;
+  nasaData.image = null;
   spinIcon();
 
+}
+
+function imageUpdate(event) {
+  var newImage = event.target.value;
+  $imageUrl.setAttribute('src', newImage);
 }
