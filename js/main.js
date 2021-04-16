@@ -106,9 +106,13 @@ function saveObvs(event) {
     observationData.editing.time = recordObv.elements.time.value;
     observationData.editing.lunarPhase = recordObv.elements.lunarPhase.value;
     observationData.editing.image = recordObv.elements.image.value;
-    observationData.editing.observations = recordObv.elements.observations.value;
+    observationData.editing.observations =
+      recordObv.elements.observations.value;
     for (var i = 0; i < observationData.observations.length; i++) {
-      if (observationData.observations[i].nextObvId === observationData.editing.nextObvId) {
+      if (
+        observationData.observations[i].nextObvId ===
+        observationData.editing.nextObvId
+      ) {
         observationData[i] = observationData.editing;
       }
       var $observationNode = document.querySelectorAll('.observation-entry');
@@ -180,7 +184,6 @@ function loadObservations(event) {
   for (var i = 0; i < observationData.observations.length; i++) {
     var $observationNode = createObservation(observationData.observations[i]);
     $newUlobservations.append($observationNode);
-
   }
 }
 
@@ -189,17 +192,21 @@ function editObservationItem(event) {
     var closestObservation = event.target.closest('.observation-entry');
     observationId = closestObservation.getAttribute('observation-data-id');
     for (var i = 0; i < observationData.observations.length; i++) {
-      if (observationData.observations[i].nextObvId.toString() === observationId) {
+      if (
+        observationData.observations[i].nextObvId.toString() === observationId
+      ) {
         viewEditForm();
         observationData.editing = observationData.observations[i];
         recordObv.elements.zipcode.value = observationData.editing.zipcode;
         recordObv.elements.location.value = observationData.editing.location;
         recordObv.elements.date.value = observationData.editing.date;
         recordObv.elements.time.value = observationData.editing.time;
-        recordObv.elements.lunarPhase.value = observationData.editing.lunarPhase;
+        recordObv.elements.lunarPhase.value =
+          observationData.editing.lunarPhase;
         recordObv.elements.image.value = observationData.editing.image;
         $imageUrl.setAttribute('src', observationData.editing.image);
-        recordObv.elements.observations.value = observationData.editing.observations;
+        recordObv.elements.observations.value =
+          observationData.editing.observations;
       }
     }
   }
@@ -212,7 +219,9 @@ function deleteModalView(event) {
 
 function confirmDelete(event) {
   for (var i = 0; i < observationData.observations.length; i++) {
-    if (observationData.observations[i].nextObvId.toString() === observationId) {
+    if (
+      observationData.observations[i].nextObvId.toString() === observationId
+    ) {
       observationData.observations.splice(i, 1);
     }
     var $li = document.querySelectorAll('li');
@@ -306,6 +315,7 @@ function getNasaData() {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     nasaData.image = xhr.response.hdurl;
+    nasaData.media_type = xhr.response.media_type;
     renderData();
   });
   xhr.send();
@@ -373,10 +383,11 @@ function renderData() {
   imageurl.value = nasaData.image;
   $imageUrl.setAttribute('src', nasaData.image);
 
-  if (nasaData.image === undefined) {
+  if (nasaData.media_type === 'video') {
     $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
     imageurl.value = 'images/placeholder.jpeg';
   }
+
   $zipCodeInput.value = null;
   nasaData.image = null;
   spinIcon();

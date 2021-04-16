@@ -1,5 +1,6 @@
 body {
-  color: white;
+  background-color: #244a80;
+  color: #fff;
   font-family: "Open sans", sans-serif;
 }
 
@@ -11,12 +12,6 @@ body {
   display: none;
 }
 
-.observation-record,
-.observation-container {
-  background-color: #244a80;
-  margin: 0, auto;
-}
-
 .header-container {
   display: flex;
   align-items: center;
@@ -24,7 +19,7 @@ body {
   font-family: "Abhaya Libre", serif;
   font-size: 1.5em;
   background-color: #1a2653;
-  color: white;
+  color: #fff;
 }
 
 .moon {
@@ -62,7 +57,7 @@ body {
 
 .icon-container {
   background-color: #1a2653;
-  color: white;
+  color: #fff;
   display: flex;
   justify-content: space-evenly;
   margin: 0;
@@ -70,7 +65,7 @@ body {
 
 .container {
   background-color: #244a80;
-  color: white;
+  color: #fff;
 }
 
 .weather-container {
@@ -97,7 +92,7 @@ body {
 .card-1,
 .card-2,
 .card-3 {
-  border: 1px solid white;
+  border: 1px solid #fff;
   border-radius: 1rem;
   background-color: #1a2653;
   padding: 1rem;
@@ -167,11 +162,16 @@ input {
   height: 2rem;
 }
 
+.label-container,
 .form-container {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+.label-container {
+  padding: 0 1rem;
 }
 
 .image-container {
@@ -185,7 +185,7 @@ input {
 }
 
 .observation-title {
-  color: white;
+  color: #fff;
   display: flex;
   justify-content: space-between;
   margin-top: 0;
@@ -201,7 +201,7 @@ input {
 label {
   text-transform: uppercase;
   font-family: "Abhaya Libre", serif;
-  color: white;
+  color: #fff;
   padding: 0.3rem 0;
 }
 
@@ -222,14 +222,13 @@ textarea:focus {
 .confirm-button,
 .delete-entry,
 .cancel-button,
-.new-button,
 .record-button {
   font-family: "Open Sans", sans-serif;
   border-radius: 0.3rem;
   padding-top: 0.35rem;
   padding-bottom: 0.35rem;
   font-size: 1em;
-  color: white;
+  color: #fff;
   background-color: #1a2653;
   margin-top: 0.85rem;
   margin-bottom: 0.85rem;
@@ -238,7 +237,6 @@ textarea:focus {
 .confirm-button,
 .delete-entry,
 .cancel-button,
-.new-button,
 .record-button:hover {
   cursor: pointer;
 }
@@ -263,7 +261,7 @@ textarea:focus {
   border-radius: 0.25rem;
   color: #1a2653;
   font-family: "Abhaya Libre", serif;
-  font-weight: bold;
+  text-align: center;
 }
 
 .modal-buttons {
@@ -296,20 +294,18 @@ textarea:focus {
 .delete-entry {
   background-color: #244a80;
   text-decoration: underline;
-  color: white;
   border: none;
 }
 
 .cancel-button {
-  background-color: #b6b6b6;
-  border: 1px solid #b6b6b6;
+  background-color: #1a2653;
+  border: 1px solid #1a2653;
   margin-bottom: 1.08rem;
 }
 
 .confirm-button {
   background-color: #dc2626;
   border: 1px solid #dc2626;
-  color: white;
   margin-bottom: 1.08rem;
 }
 
