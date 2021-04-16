@@ -39,7 +39,6 @@ recordObv.addEventListener('submit', saveObvs);
 window.addEventListener('DOMContentLoaded', loadObservations);
 $newUlobservations.addEventListener('click', editObservationItem);
 $searchInput.addEventListener('keyup', searchInput);
-
 function plusClick() {
   $observationView.className = 'observation-container';
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
@@ -70,7 +69,7 @@ function bookClick(event) {
     $pastObvs.textContent = 'No Observations Have Been Made!';
   } else {
     $pastObvs.className = 'past-observations';
-    $pastObvs.textContent = 'Past Observations:';
+    $pastObvs.textContent = 'Observations:';
   }
 }
 function viewEditForm(event) {
@@ -93,9 +92,15 @@ function searchInput(event) {
       observationData.observations[i].date.includes(searchString) === true ||
       observationData.observations[i].time.includes(searchString) === true ||
       observationData.observations[i].zipcode.includes(searchString) === true ||
-      observationData.observations[i].observations.toLowerCase().includes(searchString) === true ||
-      observationData.observations[i].lunarPhase.toLowerCase().includes(searchString) === true ||
-      observationData.observations[i].location.toLowerCase().includes(searchString) === true
+      observationData.observations[i].observations
+        .toLowerCase()
+        .includes(searchString) === true ||
+      observationData.observations[i].lunarPhase
+        .toLowerCase()
+        .includes(searchString) === true ||
+      observationData.observations[i].location
+        .toLowerCase()
+        .includes(searchString) === true
     ) {
       $li[i].getAttribute('observation-data-id');
       $li[i].className = 'observation-entry';
