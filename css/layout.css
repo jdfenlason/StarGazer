@@ -35,10 +35,6 @@
   .card-3 {
     padding: 0.6rem;
   }
-
-  #observation-list {
-    height: 900px;
-  }
 }
 
 @media screen and (min-width: 720px) {
@@ -48,6 +44,10 @@
 
   .header-container > i {
     margin-right: 1rem;
+  }
+
+  body {
+    height: 100%;
   }
 
   .header-container > h2 {
