@@ -1,3 +1,8 @@
+body {
+  color: white;
+  font-family: "Open sans", sans-serif;
+}
+
 .invisible {
   visibility: hidden;
 }
@@ -34,6 +39,10 @@
 
 .fa-moon {
   font-size: 3rem;
+}
+
+.fa-edit {
+  font-size: 1.5rem;
 }
 
 .fa-book,
@@ -149,7 +158,6 @@ textarea {
   font-family: "Open Sans", sans-serif;
   font-size: 1em;
   border: 1px solid #b6b6b6;
-  text-transform: capitalize;
 }
 
 input {
@@ -225,42 +233,15 @@ textarea:focus {
   cursor: pointer;
 }
 
-.flip-card-container {
-  width: 300px;
-  height: 400px;
-  perspective: 1000px;
+.list-observations {
+  list-style: none;
+  padding-bottom: 1.15rem;
+  margin: 0;
+  padding-left: 0;
 }
 
-.flip-card {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 1s;
-  transform-style: preserve-3d;
-}
-
-.flip-card-container:hover .flip-card {
-  transform: rotateY(180deg);
-}
-
-.flip-card-front,
-.flip-card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
+.observation-header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-}
-
-.flip-card-back {
-  background-color: #1a2653;
-  color: #fff;
-  transform: rotateY(180deg);
-}
-
-.flip-card-front img {
-  width: 100%;
-  height: 100%;
 }

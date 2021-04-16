@@ -18,6 +18,7 @@ var $observationRecordView = document.querySelector('.observation-record');
 var $imageUrl = document.querySelector('.image-url');
 var $userPhotoUrl = document.querySelector('#user-photoUrl');
 var $newUlobservations = document.querySelector('.list-observations');
+// var observationId = null;
 
 $newButton.addEventListener('click', newClick);
 $zipCodeInput.addEventListener('keyup', enterZip);
@@ -86,10 +87,10 @@ function saveObvs(event) {
   bookClick();
 }
 
-function createObservation(observation) {
+function createObservation(entry) {
   var newList = document.createElement('li');
   newList.setAttribute('class', 'observation-entry');
-  newList.setAttribute('observation-data-id', observation.nextObvId);
+  newList.setAttribute('observation-data-id', entry.nextObvId);
 
   var row = document.createElement('div');
   row.setAttribute('class', 'row');
@@ -100,38 +101,38 @@ function createObservation(observation) {
   var columnhalf2 = document.createElement('div');
   columnhalf2.setAttribute('class', 'column-half');
 
-  var flipContainer = document.createElement('div');
-  flipContainer.setAttribute('class', 'flip-card-container');
-
-  var flipCard = document.createElement('div');
-  flipCard.setAttribute('class', flipCard);
-
-  var flipfront = document.createElement('div');
-  flipfront.setAttribute('class', 'image-container');
-  flipfront.setAttribute('id', 'flip-card-front');
-
   var img = document.createElement('img');
-  img.setAttribute('src', observation.image);
+  img.setAttribute('src', entry.image);
   img.setAttribute('class', 'image-url');
-
-  var flipback = document.createElement('div');
-  flipback.setAttribute('class', 'flip-card-back');
 
   var observationheader = document.createElement('div');
   observationheader.setAttribute('class', 'observation-header');
   var h2 = document.createElement('h2');
-  h2.setAttribute('class', 'post-title');
-  h2.textContent = observation.location;
+  h2.setAttribute('class', 'post-location');
+  h2.textContent = entry.location;
+
+  var pdate = document.createElement('p');
+  pdate.setAttribute('class', 'post-date');
+  pdate.textContent = entry.date;
+
+  var pzip = document.createElement('p');
+  pzip.setAttribute('class', 'post-zip');
+  pzip.textContent = entry.zipcode;
 
   var editIcon = document.createElement('i');
   editIcon.setAttribute('class', 'fas fa-edit');
 
   var pElement = document.createElement('p');
-  pElement.textContent = observation.observations;
+  pElement.textContent = entry.observations;
+
+  var plunar = document.createElement('p');
+  plunar.textContent = entry.observations;
 
   observationheader.appendChild(h2);
   observationheader.appendChild(editIcon);
   columnhalf2.appendChild(observationheader);
+  columnhalf2.appendChild(pdate);
+  columnhalf2.appendChild(pzip);
   columnhalf2.appendChild(pElement);
   columnhalf1.appendChild(img);
   row.appendChild(columnhalf1);
@@ -147,6 +148,43 @@ function loadObservations(event) {
     $newUlobservations.append($observationNode);
   }
 }
+
+// function editEntry(event) {
+//   if (event.target.matches('i')) {
+//     var closestObservation = event.target.closest('observation-entry');
+//     observationId = closestObservation.getAttribute('observation-data-id');
+//     for (var i = 0; i < observationData.length; i++) {
+//       if (observationData.entries[i].nextObvId.toString() === observationId) {
+//         observationData.editing = observationData.observations[i];
+//         recordObv.elements.zipcode.value = observationData.editing.zipcode;
+//         recordObv.elements.location.value = observationData.editing.locations;
+//         recordObv.elements.date.value = observationData.editing.date;
+//         recordObv.elements.time.value = observationData.editing.time;
+//         recordObv.elements.lunarPhase.value = observationData.editing.lunarPhase;
+//         $imageUrl.setAttribute('src', observationData.editing.photo);
+//         recordObv.elements.observations.value = observationData.editing.observations;
+//       }
+//     }
+//   }
+// }
+
+// function confirmDelete(event) {
+//   for (var i = 0; i < observationData.observations.length; i++) {
+//     if (observationData[i].nextObvId.toString() === observationId) {
+//       observationData.splice(i, 1);
+//     }
+//     var $li = document.querySelectorAll('li');
+//     for (var x = 0; x < $li.length; x++) {
+//       if ($li[x].getAttribute('observation-data-id') === observationId) {
+//         $li[x].remove();
+//       }
+//     }
+//   }
+//   $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
+//   recordObv.reset();
+//   observationData.editing = null;
+//   bookClick();
+// }
 
 function enterZip(event) {
   if ($zipCodeInput.value.length > 5) {
