@@ -312,3 +312,11 @@ textarea:focus {
   color: white;
   margin-bottom: 1.08rem;
 }
+
+.past-observations {
+  padding-left: 1rem;
+}
+
+.center {
+  text-align: center;
+}
