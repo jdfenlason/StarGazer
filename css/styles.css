@@ -211,7 +211,7 @@ textarea:focus {
 .column-full.form-submit {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
   margin: 0 1.1rem;
 }
@@ -291,9 +291,9 @@ textarea:focus {
 }
 
 .delete-entry {
-  background-color: #eceaec;
+  background-color: #244a80;
   text-decoration: underline;
-  color: #dc2626;
+  color: white;
   border: none;
 }
 
