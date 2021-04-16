@@ -21,6 +21,28 @@
     <link rel="stylesheet" href="css/layout.css" />
   </head>
   <body>
+
+
+
+
+<div class="hidden view-modal">
+      <div class="overlay"></div>
+      <div class="delete-container">
+        <div class="column-7 modal-container">
+          <div class="modal-text">
+            <p>DO YOU WISH TO BLAST THIS OBSERVATION INTO A BLACK HOLE?</p>
+          </div>
+          <div class="modal-buttons">
+            <button class="cancel-button">CANCEL</button>
+            <button class="confirm-button">CONFIRM</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
     <header>
       <div class="row">
         <div class="column-full">
@@ -28,12 +50,13 @@
             <h2>StarGazer</h2>
             <i id="header-moon" class="fas fa-cloud-moon"></i>
             <i id="book-header" class="fas fa-book hidden"></i>
+            <i id ="plus-header" class="fas fa-plus hidden"></i>
           </div>
         </div>
       </div>
     </header>
     <main>
-      <div class="container" data-view="weather">
+      <div class=" container" data-view="weather">
         <div class="row">
           <div class="column-full">
             <div class="weather-container">
@@ -113,11 +136,12 @@
         </div>
       </div>
 
-      <div class="hidden observation-container" data-view="observations">
+      <div class=" hidden observation-container" data-view="observation-form">
+        <div class="column-full">
+          <h1 class="observation-title">Observations:</h1>
+        </div>
+
         <form class="observation-form">
-          <div class="column-full form-container">
-            <h1 class="observation-title">Observations:</h1>
-          </div>
 
           <div class="row">
             <div class="image-container column-half">
@@ -132,7 +156,7 @@
               <input
                 type="text"
                 name="zipcode"
-                placeholder="zipcode"
+                placeholder="Zipcode"
                 id="zipcode"
               />
               <label for="location">LOCATION</label>
@@ -140,13 +164,13 @@
                 required
                 type="text"
                 name="location"
-                placeholder="location"
+                placeholder="Location"
                 id="location"
               />
               <label for="date">Date</label>
-              <input type="text" name="date" placeholder="date" id="date" />
+              <input type="text" name="date" placeholder="Date" id="date" />
               <label for="time">time</label>
-              <input type="text" name="time" placeholder="time" id="time" />
+              <input type="text" name="time" placeholder="Time" id="time" />
               <label for="lunarPhase">LunarPhase</label>
               <input
                 type="text"
@@ -157,13 +181,13 @@
             </div>
 
             <div class="column-full form-container">
-              <label for="user-photoUrl">Image-url</label>
+              <label for="user-imageUrl">Image-url</label>
               <input
-                required
+
                 type="url"
-                name="photo"
+                name="image"
                 placeholder="Image-url"
-                id="user-photoUrl"
+                id="user-imageUrl"
               />
               <label for="observations">observations</label>
               <textarea
@@ -176,15 +200,37 @@
               ></textarea>
             </div>
             <div class="column-full form-submit">
+              <button class="invisible delete-entry">Delete Observation</button>
               <button class="record-button" type="submit">RECORD</button>
             </div>
           </div>
         </form>
       </div>
 
+     <div id="observation-list" class="hidden" data-view="observations">
+      <div class="form-container">
+
+        <div class="row">
+
+          <div class="column-full">
+            <h1 class="past-observations center">Past Observations:</h1>
+          </div>
+        </div>
+        <ul class="list-observations"></ul>
+
+      </div>
+</div>
+
+
+
+
+
+
+
       <div class="row">
         <div class="column-full">
           <div class="icon-container">
+           <i id ="plus-footer" class="fas fa-plus"></i>
             <i id="book-footer" class="fas fa-book"></i>
             <i id="moon-footer" class="fas fa-cloud-moon"></i>
             <i class="fas fa-star"></i>

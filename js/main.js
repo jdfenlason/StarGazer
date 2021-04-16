@@ -10,19 +10,78 @@ var $headerBookIcon = document.querySelector('#book-header');
 var $footerBookIcon = document.querySelector('#book-footer');
 var $headerMoonIcon = document.querySelector('#header-moon');
 var $footerMoonIcon = document.querySelector('#moon-footer');
+var $footerPlusIcon = document.querySelector('#plus-footer');
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
 var recordObv = document.querySelector('.observation-form');
-
+var $observationRecordView = document.querySelector('#observation-list');
 var $imageUrl = document.querySelector('.image-url');
-var $userPhotoUrl = document.querySelector('#user-photoUrl');
+var $newUlobservations = document.querySelector('.list-observations');
+var observationId = null;
+var $observationTitle = document.querySelector('.observation-title');
+var $deleteEntryBtn = document.querySelector('.delete-entry');
+var $viewModal = document.querySelector('.view-modal');
+var $cancelbutton = document.querySelector('.cancel-button');
+var $confirmbutton = document.querySelector('.confirm-button');
+var $pastObvs = document.querySelector('.past-observations');
 
+$confirmbutton.addEventListener('click', confirmDelete);
+$deleteEntryBtn.addEventListener('click', deleteModalView);
+$cancelbutton.addEventListener('click', hideModal);
+
+$footerPlusIcon.addEventListener('click', plusClick);
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
 $footerBookIcon.addEventListener('click', bookClick);
 $footerMoonIcon.addEventListener('click', moonClick);
 recordObv.addEventListener('submit', saveObvs);
-$userPhotoUrl.addEventListener('input', imageUpdate);
+window.addEventListener('DOMContentLoaded', loadObservations);
+$newUlobservations.addEventListener('click', editObservationItem);
+
+function plusClick() {
+  $observationView.className = 'observation-container';
+  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
+  $headerBookIcon.className = 'fas fa-plus';
+  $weatherView.className = 'hidden';
+  $deleteEntryBtn.className = 'invisible delete-entry';
+  $observationTitle.textContent = 'New Observation:';
+  observationData.view = 'observation-form';
+  $observationRecordView.className = 'hidden';
+}
+
+function moonClick(event) {
+  $headerBookIcon.className = 'fas fa-book hidden';
+  $headerMoonIcon.className = 'fas fa-cloud-moon';
+  $observationView.className = 'hidden observation-container';
+  $weatherView.className = 'container';
+  $observationRecordView.className = 'hidden';
+}
+function bookClick(event) {
+  $observationView.className = 'hidden observation-container';
+  $observationRecordView.className = 'observation-record';
+  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
+  $headerBookIcon.className = 'fas fa-book';
+  $weatherView.className = 'hidden';
+  observationData.view = 'observations';
+  if (observationData.observations.length === 0) {
+    $pastObvs.className = 'past-observations center';
+    $pastObvs.textContent = 'No Observations Have Been Made!';
+  } else {
+    $pastObvs.className = 'past-observations';
+    $pastObvs.textContent = 'Past Observations:';
+  }
+}
+function viewEditForm(event) {
+  $observationView.className = 'observation-container';
+  $weatherView.className = 'hidden';
+  $observationRecordView.className = 'hidden';
+  $observationTitle.textContent = 'Edit Observation';
+  $deleteEntryBtn.className = 'delete-entry';
+}
+
+function hideModal(event) {
+  $viewModal.className = 'hidden view-modal';
+}
 
 function saveObvs(event) {
   event.preventDefault();
@@ -33,29 +92,150 @@ function saveObvs(event) {
     userInput.date = recordObv.elements.date.value;
     userInput.time = recordObv.elements.time.value;
     userInput.lunarPhase = recordObv.elements.lunarPhase.value;
-    userInput.image = recordObv.elements.photo.value;
+    userInput.image = recordObv.elements.image.value;
     userInput.observations = recordObv.elements.observations.value;
     observationData.observations.unshift(userInput);
     userInput.nextObvId = observationData.nextObvId;
     observationData.nextObvId++;
+    var newNode = createObservation(observationData.observations[0]);
+    $newUlobservations.prepend(newNode);
+  } else {
+    observationData.editing.zipcode = recordObv.elements.zipcode.value;
+    observationData.editing.location = recordObv.elements.location.value;
+    observationData.editing.date = recordObv.elements.date.value;
+    observationData.editing.time = recordObv.elements.time.value;
+    observationData.editing.lunarPhase = recordObv.elements.lunarPhase.value;
+    observationData.editing.image = recordObv.elements.image.value;
+    observationData.editing.observations =
+      recordObv.elements.observations.value;
+    for (var i = 0; i < observationData.observations.length; i++) {
+      if (
+        observationData.observations[i].nextObvId ===
+        observationData.editing.nextObvId
+      ) {
+        observationData[i] = observationData.editing;
+      }
+      var $observationNode = document.querySelectorAll('.observation-entry');
+      var editObservationItem = createObservation(observationData.editing);
+      $observationNode[i].replaceWith(editObservationItem);
+    }
   }
-  $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
+  bookClick();
   recordObv.reset();
   observationData.editing = null;
 }
 
-function bookClick(event) {
-  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
-  $headerBookIcon.className = 'fas fa-book';
-  $weatherView.className = 'hidden';
-  $observationView.className = 'observation-container';
+function createObservation(entry) {
+  var newList = document.createElement('li');
+  newList.setAttribute('class', 'observation-entry');
+  newList.setAttribute('observation-data-id', entry.nextObvId);
+
+  var row = document.createElement('div');
+  row.setAttribute('class', 'row');
+
+  var columnhalf1 = document.createElement('div');
+  columnhalf1.setAttribute('class', 'column-half');
+
+  var columnhalf2 = document.createElement('div');
+  columnhalf2.setAttribute('class', 'column-half');
+
+  var img = document.createElement('img');
+  img.setAttribute('src', entry.image);
+  img.setAttribute('class', 'image-url');
+
+  var observationheader = document.createElement('div');
+  observationheader.setAttribute('class', 'observation-header');
+  var h2 = document.createElement('h2');
+  h2.setAttribute('class', 'post-location');
+  h2.textContent = entry.location;
+
+  var pdate = document.createElement('p');
+  pdate.setAttribute('class', 'post-date');
+  pdate.textContent = entry.date;
+
+  var pzip = document.createElement('p');
+  pzip.setAttribute('class', 'post-zip');
+  pzip.textContent = entry.zipcode;
+
+  var editIcon = document.createElement('i');
+  editIcon.setAttribute('class', 'fas fa-edit');
+
+  var pElement = document.createElement('p');
+  pElement.textContent = entry.observations;
+
+  var plunar = document.createElement('p');
+  plunar.textContent = entry.observations;
+
+  observationheader.appendChild(h2);
+  observationheader.appendChild(editIcon);
+  columnhalf2.appendChild(observationheader);
+  columnhalf2.appendChild(pdate);
+  columnhalf2.appendChild(pzip);
+  columnhalf2.appendChild(pElement);
+  columnhalf1.appendChild(img);
+  row.appendChild(columnhalf1);
+  row.appendChild(columnhalf2);
+  newList.appendChild(row);
+
+  return newList;
 }
 
-function moonClick(event) {
-  $headerBookIcon.className = 'fas fa-book hidden';
-  $headerMoonIcon.className = 'fas fa-cloud-moon';
-  $observationView.className = 'hidden observation-container';
-  $weatherView.className = 'container';
+function loadObservations(event) {
+  for (var i = 0; i < observationData.observations.length; i++) {
+    var $observationNode = createObservation(observationData.observations[i]);
+    $newUlobservations.append($observationNode);
+  }
+}
+
+function editObservationItem(event) {
+  if (event.target.matches('i')) {
+    var closestObservation = event.target.closest('.observation-entry');
+    observationId = closestObservation.getAttribute('observation-data-id');
+    for (var i = 0; i < observationData.observations.length; i++) {
+      if (
+        observationData.observations[i].nextObvId.toString() === observationId
+      ) {
+        viewEditForm();
+        observationData.editing = observationData.observations[i];
+        recordObv.elements.zipcode.value = observationData.editing.zipcode;
+        recordObv.elements.location.value = observationData.editing.location;
+        recordObv.elements.date.value = observationData.editing.date;
+        recordObv.elements.time.value = observationData.editing.time;
+        recordObv.elements.lunarPhase.value =
+          observationData.editing.lunarPhase;
+        recordObv.elements.image.value = observationData.editing.image;
+        $imageUrl.setAttribute('src', observationData.editing.image);
+        recordObv.elements.observations.value =
+          observationData.editing.observations;
+      }
+    }
+  }
+}
+
+function deleteModalView(event) {
+  event.preventDefault();
+  $viewModal.className = 'view-modal';
+}
+
+function confirmDelete(event) {
+  for (var i = 0; i < observationData.observations.length; i++) {
+    if (
+      observationData.observations[i].nextObvId.toString() === observationId
+    ) {
+      observationData.observations.splice(i, 1);
+    }
+    var $li = document.querySelectorAll('li');
+    for (var x = 0; x < $li.length; x++) {
+      if ($li[x].getAttribute('observation-data-id') === observationId) {
+        $li[x].remove();
+      }
+    }
+  }
+  $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
+  recordObv.reset();
+  observationData.editing = null;
+  hideModal();
+  bookClick();
 }
 
 function enterZip(event) {
@@ -135,6 +315,7 @@ function getNasaData() {
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     nasaData.image = xhr.response.hdurl;
+    nasaData.media_type = xhr.response.media_type;
     renderData();
   });
   xhr.send();
@@ -198,16 +379,18 @@ function renderData() {
   var lunarPhase = document.querySelector('#lunarPhase');
   lunarPhase.value = weatherData.moon_phase;
 
-  var imageurl = document.querySelector('#user-photoUrl');
+  var imageurl = document.querySelector('#user-imageUrl');
   imageurl.value = nasaData.image;
   $imageUrl.setAttribute('src', nasaData.image);
+
+  if (nasaData.media_type === 'video') {
+    $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
+    imageurl.value = 'images/placeholder.jpeg';
+  }
 
   $zipCodeInput.value = null;
   nasaData.image = null;
   spinIcon();
 }
 
-function imageUpdate(event) {
-  var newImage = event.target.value;
-  $imageUrl.setAttribute('src', newImage);
-}
+window.addEventListener('DOMContentLoaded', loadObservations);

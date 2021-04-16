@@ -9,10 +9,15 @@
 
 .column-half {
   width: 50%;
+  padding: 1rem;
 }
 
 .column-third {
   flex-basis: calc(100% / 3);
+}
+
+.column-7 {
+  width: 75%;
 }
 
 .card-1,
@@ -29,6 +34,10 @@
   .card-2,
   .card-3 {
     padding: 0.6rem;
+  }
+
+  #observation-list {
+    height: 900px;
   }
 }
 

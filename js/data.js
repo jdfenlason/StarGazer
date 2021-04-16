@@ -6,7 +6,8 @@
 var observationData = {
   observations: [],
   editing: null,
-  nextObvId: 1
+  nextObvId: 1,
+  view: 'observations'
 };
 var astronomyData = {
   zipCode: null
