@@ -50,6 +50,7 @@
             <h2>StarGazer</h2>
             <i id="header-moon" class="fas fa-cloud-moon"></i>
             <i id="book-header" class="fas fa-book hidden"></i>
+            <i id ="plus-header" class="fas fa-plus hidden"></i>
           </div>
         </div>
       </div>
@@ -135,9 +136,9 @@
         </div>
       </div>
 
-      <div class="observation-container" data-view="observation-form">
-        <div class="column-full observation-title">
-          <h1 class="">Observations:</h1>
+      <div class=" hidden observation-container" data-view="observation-form">
+        <div class="column-full">
+          <h2 class="observation-title">Observations:</h2>
         </div>
 
         <form class="observation-form">
@@ -167,9 +168,9 @@
                 id="location"
               />
               <label for="date">Date</label>
-              <input type="text" name="date" placeholder="date" id="date" />
+              <input type="text" name="date" placeholder="Date" id="date" />
               <label for="time">time</label>
-              <input type="text" name="time" placeholder="time" id="time" />
+              <input type="text" name="time" placeholder="Time" id="time" />
               <label for="lunarPhase">LunarPhase</label>
               <input
                 type="text"
@@ -182,7 +183,7 @@
             <div class="column-full form-container">
               <label for="user-photoUrl">Image-url</label>
               <input
-                required
+
                 type="url"
                 name="photo"
                 placeholder="Image-url"
@@ -199,21 +200,20 @@
               ></textarea>
             </div>
             <div class="column-full form-submit">
-              <button class=" delete-entry">Delete Entry</button>
+              <button class="invisible delete-entry">Delete Entry</button>
               <button class="record-button" type="submit">RECORD</button>
             </div>
           </div>
         </form>
       </div>
 
-     <div class="observation-record" data-view="observation-record">
+     <div id="observation-list" class="hidden" data-view="observations">
       <div class="form-container">
 
         <div class="row">
 
-          <div class="column-full observation-title">
+          <div class="column-full">
             <h1 class="">Past Observations:</h1>
-            <button class="new-button">NEW</button>
           </div>
         </div>
         <ul class="list-observations"></ul>
@@ -230,6 +230,7 @@
       <div class="row">
         <div class="column-full">
           <div class="icon-container">
+           <i id ="plus-footer" class="fas fa-plus"></i>
             <i id="book-footer" class="fas fa-book"></i>
             <i id="moon-footer" class="fas fa-cloud-moon"></i>
             <i class="fas fa-star"></i>

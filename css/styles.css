@@ -45,6 +45,7 @@ body {
   font-size: 1.5rem;
 }
 
+.fa-plus,
 .fa-book,
 .fa-star,
 .fa-cloud-moon {
@@ -53,6 +54,7 @@ body {
 }
 
 .fa-edit:hover,
+#plus-footer:hover,
 #book-footer:hover,
 #moon-footer:hover {
   cursor: pointer;
@@ -186,8 +188,9 @@ input {
   color: white;
   display: flex;
   justify-content: space-between;
-  margin: 0 auto;
-  padding: 0 1.5rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  padding: 1rem;
   align-items: center;
 }
 
