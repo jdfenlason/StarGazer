@@ -18,7 +18,16 @@ var $observationRecordView = document.querySelector('.observation-record');
 var $imageUrl = document.querySelector('.image-url');
 var $userPhotoUrl = document.querySelector('#user-photoUrl');
 var $newUlobservations = document.querySelector('.list-observations');
-// var observationId = null;
+var observationId = null;
+var $observationTitle = document.querySelector('.observation-title');
+var $deleteEntryBtn = document.querySelector('.delete-entry');
+var $viewModal = document.querySelector('.view-modal');
+var $cancelbutton = document.querySelector('.cancel-button');
+var $confirmbutton = document.querySelector('.confirm-button');
+
+$confirmbutton.addEventListener('click', confirmDelete);
+$deleteEntryBtn.addEventListener('click', deletModalView);
+$cancelbutton.addEventListener('click', hideModal);
 
 $newButton.addEventListener('click', newClick);
 $zipCodeInput.addEventListener('keyup', enterZip);
@@ -28,6 +37,8 @@ $footerMoonIcon.addEventListener('click', moonClick);
 recordObv.addEventListener('submit', saveObvs);
 $userPhotoUrl.addEventListener('input', imageUpdate);
 window.addEventListener('DOMContentLoaded', loadObservations);
+$newUlobservations.addEventListener('click', editObservationItem);
+
 function newClick() {
   $observationRecordView.className = 'hidden observation-record';
   $observationView.className = 'observation-container';
@@ -48,6 +59,16 @@ function bookClick(event) {
   $weatherView.className = 'hidden';
   $observationView.className = 'hidden observation-container';
   $observationRecordView.className = 'observation-record';
+}
+function viewEditForm(event) {
+  $weatherView.className = 'hidden';
+  $observationRecordView = 'hidden';
+  $observationTitle.textContent = 'Edit Observation';
+  $deleteEntryBtn.className = 'delete-entry';
+}
+
+function hideModal(event) {
+  $viewModal.className = 'hidden view-modal';
 }
 
 function saveObvs(event) {
@@ -149,42 +170,48 @@ function loadObservations(event) {
   }
 }
 
-// function editEntry(event) {
-//   if (event.target.matches('i')) {
-//     var closestObservation = event.target.closest('observation-entry');
-//     observationId = closestObservation.getAttribute('observation-data-id');
-//     for (var i = 0; i < observationData.length; i++) {
-//       if (observationData.entries[i].nextObvId.toString() === observationId) {
-//         observationData.editing = observationData.observations[i];
-//         recordObv.elements.zipcode.value = observationData.editing.zipcode;
-//         recordObv.elements.location.value = observationData.editing.locations;
-//         recordObv.elements.date.value = observationData.editing.date;
-//         recordObv.elements.time.value = observationData.editing.time;
-//         recordObv.elements.lunarPhase.value = observationData.editing.lunarPhase;
-//         $imageUrl.setAttribute('src', observationData.editing.photo);
-//         recordObv.elements.observations.value = observationData.editing.observations;
-//       }
-//     }
-//   }
-// }
+function editObservationItem(event) {
+  if (event.target.matches('i')) {
+    viewEditForm();
+    var closestObservation = event.target.closest('observation-entry');
+    observationId = closestObservation.getAttribute('observation-data-id');
+    for (var i = 0; i < observationData.length; i++) {
+      if (observationData.entries[i].nextObvId.toString() === observationId) {
+        observationData.editing = observationData.observations[i];
+        recordObv.elements.zipcode.value = observationData.editing.zipcode;
+        recordObv.elements.location.value = observationData.editing.locations;
+        recordObv.elements.date.value = observationData.editing.date;
+        recordObv.elements.time.value = observationData.editing.time;
+        recordObv.elements.lunarPhase.value = observationData.editing.lunarPhase;
+        $imageUrl.setAttribute('src', observationData.editing.photo);
+        recordObv.elements.observations.value = observationData.editing.observations;
+      }
+    }
+  }
+}
 
-// function confirmDelete(event) {
-//   for (var i = 0; i < observationData.observations.length; i++) {
-//     if (observationData[i].nextObvId.toString() === observationId) {
-//       observationData.splice(i, 1);
-//     }
-//     var $li = document.querySelectorAll('li');
-//     for (var x = 0; x < $li.length; x++) {
-//       if ($li[x].getAttribute('observation-data-id') === observationId) {
-//         $li[x].remove();
-//       }
-//     }
-//   }
-//   $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
-//   recordObv.reset();
-//   observationData.editing = null;
-//   bookClick();
-// }
+function deletModalView(event) {
+  event.preventDefault();
+  $viewModal.className = 'view-modal';
+}
+
+function confirmDelete(event) {
+  for (var i = 0; i < observationData.observations.length; i++) {
+    if (observationData[i].nextObvId.toString() === observationId) {
+      observationData.splice(i, 1);
+    }
+    var $li = document.querySelectorAll('li');
+    for (var x = 0; x < $li.length; x++) {
+      if ($li[x].getAttribute('observation-data-id') === observationId) {
+        $li[x].remove();
+      }
+    }
+  }
+  $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
+  recordObv.reset();
+  observationData.editing = null;
+  bookClick();
+}
 
 function enterZip(event) {
   if ($zipCodeInput.value.length > 5) {
