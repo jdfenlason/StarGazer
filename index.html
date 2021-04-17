@@ -172,7 +172,7 @@
               />
             </div>
 
-            <div class="column-full form-container">
+            <div class="column-full label-container">
               <label for="user-imageUrl">Image-url</label>
               <input
                 type="url"
@@ -199,27 +199,31 @@
       </div>
 
       <div id="observation-list" class="hidden" data-view="observations">
-        <div class="form-container">
-          <div class="row">
-            <div class="column-full">
-              <div class="search-header">
-                <h1 class="past-observations center">Observations:</h1>
+        <div class ="container-form">
 
-                <div class="search-icon-container">
-                  <i class="fas fa-search"></i>
-                  <input
+          <div class="form-container">
+            <div class="row">
+              <div class="column-full">
+                <div class="search-header">
+                  <h1 class="past-observations center">Observations:</h1>
+
+                  <div class="search-icon-container">
+                    <i class="fas fa-search"></i>
+                    <input
                     required
                     name="search"
                     type="text"
                     id="user-search"
                     placeholder="Search"
-                  />
+                    />
+                  </div>
                 </div>
               </div>
             </div>
+            <ul class="list-observations"></ul>
           </div>
-          <ul class="list-observations"></ul>
         </div>
+
       </div>
 
       <div class="row">

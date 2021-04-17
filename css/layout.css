@@ -50,6 +50,10 @@
     height: 100%;
   }
 
+  .row {
+    width: 100%;
+  }
+
   .header-container > h2 {
     margin-left: 2rem;
   }
@@ -62,5 +66,10 @@
 
   .column-half {
     width: 100%;
+  }
+
+  .container-form {
+    min-height: 900px;
+    min-width: 500px;
   }
 }
