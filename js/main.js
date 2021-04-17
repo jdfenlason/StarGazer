@@ -24,6 +24,7 @@ var $viewModal = document.querySelector('.view-modal');
 var $cancelbutton = document.querySelector('.cancel-button');
 var $confirmbutton = document.querySelector('.confirm-button');
 var $pastObvs = document.querySelector('.past-observations');
+var $searchInput = document.querySelector('#user-search');
 
 $confirmbutton.addEventListener('click', confirmDelete);
 $deleteEntryBtn.addEventListener('click', deleteModalView);
@@ -37,7 +38,7 @@ $footerMoonIcon.addEventListener('click', moonClick);
 recordObv.addEventListener('submit', saveObvs);
 window.addEventListener('DOMContentLoaded', loadObservations);
 $newUlobservations.addEventListener('click', editObservationItem);
-
+$searchInput.addEventListener('keyup', searchInput);
 function plusClick() {
   $observationView.className = 'observation-container';
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
@@ -68,7 +69,7 @@ function bookClick(event) {
     $pastObvs.textContent = 'No Observations Have Been Made!';
   } else {
     $pastObvs.className = 'past-observations';
-    $pastObvs.textContent = 'Past Observations:';
+    $pastObvs.textContent = 'Observations:';
   }
 }
 function viewEditForm(event) {
@@ -81,6 +82,32 @@ function viewEditForm(event) {
 
 function hideModal(event) {
   $viewModal.className = 'hidden view-modal';
+}
+
+function searchInput(event) {
+  var searchString = event.target.value.toLowerCase();
+  var $li = document.querySelectorAll('li');
+  for (var i = 0; i < observationData.observations.length; i++) {
+    if (
+      observationData.observations[i].date.includes(searchString) === true ||
+      observationData.observations[i].time.includes(searchString) === true ||
+      observationData.observations[i].zipcode.includes(searchString) === true ||
+      observationData.observations[i].observations
+        .toLowerCase()
+        .includes(searchString) === true ||
+      observationData.observations[i].lunarPhase
+        .toLowerCase()
+        .includes(searchString) === true ||
+      observationData.observations[i].location
+        .toLowerCase()
+        .includes(searchString) === true
+    ) {
+      $li[i].getAttribute('observation-data-id');
+      $li[i].className = 'observation-entry';
+    } else {
+      $li[i].className = 'observation-entry hidden';
+    }
+  }
 }
 
 function saveObvs(event) {

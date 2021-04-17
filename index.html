@@ -21,11 +21,7 @@
     <link rel="stylesheet" href="css/layout.css" />
   </head>
   <body>
-
-
-
-
-<div class="hidden view-modal">
+    <div class="hidden view-modal">
       <div class="overlay"></div>
       <div class="delete-container">
         <div class="column-7 modal-container">
@@ -40,9 +36,6 @@
       </div>
     </div>
 
-
-
-
     <header>
       <div class="row">
         <div class="column-full">
@@ -50,13 +43,13 @@
             <h2>StarGazer</h2>
             <i id="header-moon" class="fas fa-cloud-moon"></i>
             <i id="book-header" class="fas fa-book hidden"></i>
-            <i id ="plus-header" class="fas fa-plus hidden"></i>
+            <i id="plus-header" class="fas fa-plus hidden"></i>
           </div>
         </div>
       </div>
     </header>
     <main>
-      <div class=" container" data-view="weather">
+      <div class="container" data-view="weather">
         <div class="row">
           <div class="column-full">
             <div class="weather-container">
@@ -136,13 +129,12 @@
         </div>
       </div>
 
-      <div class=" hidden observation-container" data-view="observation-form">
+      <div class="hidden observation-container" data-view="observation-form">
         <div class="column-full">
           <h1 class="observation-title">Observations:</h1>
         </div>
 
         <form class="observation-form">
-
           <div class="row">
             <div class="image-container column-half">
               <img
@@ -180,10 +172,9 @@
               />
             </div>
 
-            <div class="column-full form-container">
+            <div class="column-full label-container">
               <label for="user-imageUrl">Image-url</label>
               <input
-
                 type="url"
                 name="image"
                 placeholder="Image-url"
@@ -207,30 +198,38 @@
         </form>
       </div>
 
-     <div id="observation-list" class="hidden" data-view="observations">
-      <div class="form-container">
+      <div id="observation-list" class="hidden" data-view="observations">
+        <div class ="container-form">
 
-        <div class="row">
+          <div class="form-container">
+            <div class="row">
+              <div class="column-full">
+                <div class="search-header">
+                  <h1 class="past-observations center">Observations:</h1>
 
-          <div class="column-full">
-            <h1 class="past-observations center">Past Observations:</h1>
+                  <div class="search-icon-container">
+                    <i class="fas fa-search"></i>
+                    <input
+                    required
+                    name="search"
+                    type="text"
+                    id="user-search"
+                    placeholder="Search"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ul class="list-observations"></ul>
           </div>
         </div>
-        <ul class="list-observations"></ul>
 
       </div>
-</div>
-
-
-
-
-
-
 
       <div class="row">
         <div class="column-full">
           <div class="icon-container">
-           <i id ="plus-footer" class="fas fa-plus"></i>
+            <i id="plus-footer" class="fas fa-plus"></i>
             <i id="book-footer" class="fas fa-book"></i>
             <i id="moon-footer" class="fas fa-cloud-moon"></i>
             <i class="fas fa-star"></i>

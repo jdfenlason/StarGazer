@@ -311,8 +311,39 @@ textarea:focus {
 
 .past-observations {
   padding-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .center {
   text-align: center;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+.search-icon-container > i {
+  position: absolute;
+}
+
+.search-icon-container > input {
+  padding-left: 3rem;
+  margin: 0;
+}
+
+.search-icon-container {
+  display: inline-block;
+  margin: 0 1rem;
+}
+
+.fa-search {
+  color: #1a2653;
+  text-align: left;
+  padding: 0.5rem;
 }
