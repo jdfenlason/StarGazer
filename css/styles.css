@@ -343,3 +343,30 @@ textarea:focus {
   text-align: left;
   padding: 0.5rem;
 }
+
+.favorite-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+#relative {
+  position: relative;
+}
+
+#favorite-image-star {
+  position: absolute;
+  z-index: 1;
+}
+
+.star-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.star-container > i {
+  font-size: 2em;
+}
+
+.blue {
+  color: #1a2653;
+}

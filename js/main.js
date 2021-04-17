@@ -29,6 +29,7 @@ var $cancelbutton = document.querySelector('.cancel-button');
 var $confirmbutton = document.querySelector('.confirm-button');
 var $pastObvs = document.querySelector('.past-observations');
 var $searchInput = document.querySelector('#user-search');
+var $favoriteStar = document.querySelector('#favorite-image-star');
 
 $confirmbutton.addEventListener('click', confirmDelete);
 $deleteEntryBtn.addEventListener('click', deleteModalView);
@@ -44,6 +45,7 @@ recordObv.addEventListener('submit', saveObvs);
 window.addEventListener('DOMContentLoaded', loadObservations);
 $newUlobservations.addEventListener('click', editObservationItem);
 $searchInput.addEventListener('keyup', searchInput);
+$favoriteStar.addEventListener('click', favoriteClick);
 
 function starClick(event) {
   $headerBookIcon.className = 'fas fa-book hidden';
@@ -136,6 +138,11 @@ function searchInput(event) {
       $li[i].className = 'observation-entry hidden';
     }
   }
+}
+
+function favoriteClick(event) {
+  $favoriteStar.className = 'far fa-star';
+
 }
 
 function saveObvs(event) {
