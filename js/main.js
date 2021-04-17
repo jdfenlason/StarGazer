@@ -7,12 +7,16 @@ var $zipCodeInput = document.querySelector('.zip-code');
 var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
 var $headerBookIcon = document.querySelector('#book-header');
+var $headerStarIcon = document.querySelector('#star-header');
+var $headerMoonIcon = document.querySelector('#moon-header');
+var $headerPlusIcon = document.querySelector('#plus-header');
 var $footerBookIcon = document.querySelector('#book-footer');
-var $headerMoonIcon = document.querySelector('#header-moon');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $footerPlusIcon = document.querySelector('#plus-footer');
+var $footerStarIcon = document.querySelector('#star-footer');
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
+var $favoriteView = document.querySelector('.favorite-container');
 var recordObv = document.querySelector('.observation-form');
 var $observationRecordView = document.querySelector('#observation-list');
 var $imageUrl = document.querySelector('.image-url');
@@ -35,35 +39,59 @@ $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
 $footerBookIcon.addEventListener('click', bookClick);
 $footerMoonIcon.addEventListener('click', moonClick);
+$footerStarIcon.addEventListener('click', starClick);
 recordObv.addEventListener('submit', saveObvs);
 window.addEventListener('DOMContentLoaded', loadObservations);
 $newUlobservations.addEventListener('click', editObservationItem);
 $searchInput.addEventListener('keyup', searchInput);
-function plusClick() {
+
+function starClick(event) {
+  $headerBookIcon.className = 'fas fa-book hidden';
+  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
+  $headerPlusIcon.className = 'fas fa-plus hidden';
+  $headerStarIcon.className = 'fas fa-star';
+  $observationRecordView.className = 'hidden';
+  $observationView.className = 'hidden observation-container';
+  $weatherView.className = 'hidden';
+  $favoriteView.className = 'favorite-container';
+}
+
+function plusClick(event) {
   $observationView.className = 'observation-container';
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
-  $headerBookIcon.className = 'fas fa-plus';
+  $headerBookIcon.className = 'fas fa-book hidden';
+  $headerPlusIcon.className = 'fas fa-plus';
+  $headerStarIcon.className = 'fas fa-star hidden';
   $weatherView.className = 'hidden';
   $deleteEntryBtn.className = 'invisible delete-entry';
   $observationTitle.textContent = 'New Observation:';
   observationData.view = 'observation-form';
   $observationRecordView.className = 'hidden';
+  $favoriteView.className = 'favorite-container hidden';
 }
 
 function moonClick(event) {
   $headerBookIcon.className = 'fas fa-book hidden';
   $headerMoonIcon.className = 'fas fa-cloud-moon';
+  $headerPlusIcon.className = 'fas fa-plus hidden';
+  $headerStarIcon.className = 'fas fa-star hidden';
+  $favoriteView.className = 'favorite-container hidden';
   $observationView.className = 'hidden observation-container';
   $weatherView.className = 'container';
   $observationRecordView.className = 'hidden';
+  observationData.editing = null;
 }
 function bookClick(event) {
   $observationView.className = 'hidden observation-container';
+  $weatherView.className = 'hidden';
+  $favoriteView.className = 'favorite-container hidden';
   $observationRecordView.className = 'observation-record';
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerBookIcon.className = 'fas fa-book';
-  $weatherView.className = 'hidden';
+  $headerPlusIcon.className = 'fas fa-plus hidden';
+  $headerStarIcon.className = 'fas fa-star hidden';
   observationData.view = 'observations';
+  observationData.editing = null;
   if (observationData.observations.length === 0) {
     $pastObvs.className = 'past-observations center';
     $pastObvs.textContent = 'No Observations Have Been Made!';
@@ -140,16 +168,16 @@ function saveObvs(event) {
         observationData.observations[i].nextObvId ===
         observationData.editing.nextObvId
       ) {
-        observationData[i] = observationData.editing;
+        observationData.observations[i] = observationData.editing;
+        var $observationNode = document.querySelectorAll('.observation-entry');
+        var editObservationItem = createObservation(observationData.editing);
+        $observationNode[i].replaceWith(editObservationItem);
       }
-      var $observationNode = document.querySelectorAll('.observation-entry');
-      var editObservationItem = createObservation(observationData.editing);
-      $observationNode[i].replaceWith(editObservationItem);
     }
   }
-  bookClick();
   recordObv.reset();
   observationData.editing = null;
+  bookClick();
 }
 
 function createObservation(entry) {
@@ -216,13 +244,13 @@ function loadObservations(event) {
 
 function editObservationItem(event) {
   if (event.target.matches('i')) {
+    viewEditForm();
     var closestObservation = event.target.closest('.observation-entry');
     observationId = closestObservation.getAttribute('observation-data-id');
     for (var i = 0; i < observationData.observations.length; i++) {
       if (
         observationData.observations[i].nextObvId.toString() === observationId
       ) {
-        viewEditForm();
         observationData.editing = observationData.observations[i];
         recordObv.elements.zipcode.value = observationData.editing.zipcode;
         recordObv.elements.location.value = observationData.editing.location;

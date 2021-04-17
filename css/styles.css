@@ -1,8 +1,3 @@
-body {
-  background-color: #244a80;
-  color: #fff;
-  font-family: "Open sans", sans-serif;
-}
 
 .invisible {
   visibility: hidden;
@@ -48,6 +43,7 @@ body {
   padding: 1rem;
 }
 
+.fa-star:hover,
 .fa-edit:hover,
 #plus-footer:hover,
 #book-footer:hover,
