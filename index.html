@@ -193,6 +193,8 @@
             </div>
             <div class="column-full form-submit">
               <button class="invisible delete-entry">Delete Observation</button>
+               <i id = "emptystarBtn" class="hidden far fa-star"></i>
+                <i id = "starBtn" class="invisible hidden fas fa-star"></i>
               <button class="record-button" type="submit">RECORD</button>
             </div>
           </div>
@@ -220,7 +222,9 @@
                 </div>
               </div>
             </div>
-            <ul class="list-observations"></ul>
+            <ul class="list-observations">
+
+            </ul>
           </div>
         </div>
       </div>
@@ -238,23 +242,27 @@
                 </div>
               </div>
             </div>
+            <div class="row">
             <div class="favorite-image-container">
-              <div class="column-half">
-                <i id ="favorite-image-star" class="fas fa-star"></i>
-              <img
+
+               <i class="fas fa-chevron-left"></i>
+               <div class="column-half">
+
+                 <div class="star-icon-image-container">
+
+                </div>
+                <img
                 class="image-url"
-                id ="relative"
+                id ="favorites"
                 src="images/placeholder.jpeg"
                 alt="stars"
-              />
+                />
+
+              </div>
+
+              <i class="fas fa-chevron-right"></i>
             </div>
-          </div>
-          <div class = "star-container">
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star blue"></i>
-            <i class="fas fa-star blue"></i>
-            <i class="fas fa-star blue"></i>
-            <i class="fas fa-star blue"></i>
+
           </div>
         </div>
         </div>

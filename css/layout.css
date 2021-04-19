@@ -46,6 +46,10 @@ body {
   body {
     min-width: 500px;
   }
+
+  .container-form {
+    min-height: 80vh;
+  }
 }
 
 @media screen and (min-width: 720px) {
@@ -73,12 +77,5 @@ body {
 
   .column-half {
     width: 100%;
-  }
-}
-
-@media screen and (max-width: 1600px) {
-  .container-form {
-    min-height: 900px;
-    min-width: 500px;
   }
 }

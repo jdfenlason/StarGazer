@@ -29,12 +29,14 @@ var $cancelbutton = document.querySelector('.cancel-button');
 var $confirmbutton = document.querySelector('.confirm-button');
 var $pastObvs = document.querySelector('.past-observations');
 var $searchInput = document.querySelector('#user-search');
-var $favoriteStar = document.querySelector('#favorite-image-star');
+var $leftArrow = document.querySelector('.fa-chevron-left');
+var $rightArrow = document.querySelector('.fa-chevron-right');
 
+$cancelbutton.addEventListener('click', hideModal);
 $confirmbutton.addEventListener('click', confirmDelete);
 $deleteEntryBtn.addEventListener('click', deleteModalView);
-$cancelbutton.addEventListener('click', hideModal);
-
+$leftArrow.addEventListener('click', leftArrowClick);
+$rightArrow.addEventListener('click', rightArrowClick);
 $footerPlusIcon.addEventListener('click', plusClick);
 $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keypress', submit);
@@ -45,7 +47,50 @@ recordObv.addEventListener('submit', saveObvs);
 window.addEventListener('DOMContentLoaded', loadObservations);
 $newUlobservations.addEventListener('click', editObservationItem);
 $searchInput.addEventListener('keyup', searchInput);
-$favoriteStar.addEventListener('click', favoriteClick);
+var $emptystarBtn = document.querySelector('#emptystarBtn');
+$emptystarBtn.addEventListener('click', dislikeClick);
+
+var $favoriteStarBtn = document.querySelector('#starBtn');
+$favoriteStarBtn.addEventListener('click', favoriteClick);
+
+function dislikeClick(event) {
+  if (observationData.editing.starId === null);
+  observationData.favorites.push(observationData.editing);
+  $favoriteStarBtn.className = 'fas fa-star';
+  $emptystarBtn.className = 'hidden far fa-star';
+  observationData.editing.starId = true;
+
+}
+var $favoriteImages = document.querySelector('#favorites');
+
+function slideShow(event) {
+  $favoriteImages.setAttribute('src', observationData.favorites[1].image);
+}
+slideShow();
+
+function leftArrowClick(event) {
+  var counter = 0;
+  for (var i = 0; i < observationData.favorites.length; i++) {
+    $favoriteImages.setAttribute('src', observationData.favorites[counter].image);
+  }
+}
+
+function rightArrowClick(event) {
+
+}
+
+function favoriteClick(event) {
+  for (var i = 0; i < observationData.observations.length; i++) {
+    if (
+      observationData.editing.starId === true &&
+        observationData.observations[i].nextObvId ===
+            observationData.editing.nextObvId);
+    $emptystarBtn.className = 'far fa-star';
+    $favoriteStarBtn.className = 'hidden fas fa-star';
+    observationData.favorites.splice(i, 1);
+  }
+  observationData.editing.starId = null;
+}
 
 function starClick(event) {
   $headerBookIcon.className = 'fas fa-book hidden';
@@ -66,6 +111,8 @@ function plusClick(event) {
   $headerStarIcon.className = 'fas fa-star hidden';
   $weatherView.className = 'hidden';
   $deleteEntryBtn.className = 'invisible delete-entry';
+  $emptystarBtn.className = 'hidden far fa-star';
+  $favoriteStarBtn.className = 'hidden fas fa-star';
   $observationTitle.textContent = 'New Observation:';
   observationData.view = 'observation-form';
   $observationRecordView.className = 'hidden';
@@ -103,6 +150,8 @@ function bookClick(event) {
   }
 }
 function viewEditForm(event) {
+  $favoriteStarBtn.className = 'hidden fa-star';
+  $emptystarBtn.className = 'far fa-star';
   $observationView.className = 'observation-container';
   $weatherView.className = 'hidden';
   $observationRecordView.className = 'hidden';
@@ -110,6 +159,21 @@ function viewEditForm(event) {
   $deleteEntryBtn.className = 'delete-entry';
 }
 
+function starCheck() {
+  for (var i = 0; i < observationData.favorites.length; i++) {
+    if (observationData.favorites[i].starId === true && observationData.favorites[i].nextObvId === observationData.editing.nextObvId) {
+      $emptystarBtn.className = 'hidden far fa-star';
+      $favoriteStarBtn.className = 'fas fa-star';
+    }
+    if (observationData.favorites.length === observationData.observations.length) {
+      $emptystarBtn.className = 'hidden far fa-star';
+      $favoriteStarBtn.className = 'fas fa-star';
+    } else {
+      $emptystarBtn.className = 'far fa-star';
+      $favoriteStarBtn.className = 'hidden fas fa-star';
+    }
+  }
+}
 function hideModal(event) {
   $viewModal.className = 'hidden view-modal';
 }
@@ -138,11 +202,6 @@ function searchInput(event) {
       $li[i].className = 'observation-entry hidden';
     }
   }
-}
-
-function favoriteClick(event) {
-  $favoriteStar.className = 'far fa-star';
-
 }
 
 function saveObvs(event) {
@@ -250,7 +309,7 @@ function loadObservations(event) {
 }
 
 function editObservationItem(event) {
-  if (event.target.matches('i')) {
+  if (event.target.matches('.fa-edit')) {
     viewEditForm();
     var closestObservation = event.target.closest('.observation-entry');
     observationId = closestObservation.getAttribute('observation-data-id');
@@ -269,11 +328,11 @@ function editObservationItem(event) {
         $imageUrl.setAttribute('src', observationData.editing.image);
         recordObv.elements.observations.value =
           observationData.editing.observations;
+        starCheck();
       }
     }
   }
 }
-
 function deleteModalView(event) {
   event.preventDefault();
   $viewModal.className = 'view-modal';
@@ -286,11 +345,11 @@ function confirmDelete(event) {
     ) {
       observationData.observations.splice(i, 1);
     }
-    var $li = document.querySelectorAll('li');
-    for (var x = 0; x < $li.length; x++) {
-      if ($li[x].getAttribute('observation-data-id') === observationId) {
-        $li[x].remove();
-      }
+  }
+  var $li = document.querySelectorAll('li');
+  for (var x = 0; x < $li.length; x++) {
+    if ($li[x].getAttribute('observation-data-id') === observationId) {
+      $li[x].remove();
     }
   }
   $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
