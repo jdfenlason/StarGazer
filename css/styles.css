@@ -42,6 +42,22 @@
   padding: 1rem;
 }
 
+.fa-chevron-right,
+.fa-chevron-left {
+  font-size: 2.5rem;
+  padding: 1rem;
+}
+
+.fa-chevron-right {
+  margin-left: 3rem;
+}
+
+.fa-chevron-left {
+  margin-right: 3rem;
+}
+
+.fa-chevron-left:hover,
+.fa-chevron-right:hover,
 .fa-star:hover,
 .fa-edit:hover,
 #plus-footer:hover,
@@ -348,6 +364,8 @@ textarea:focus {
   display: flex;
   justify-content: center;
   width: 100%;
+  min-height: 350px;
+  object-fit: contain;
   align-items: center;
   padding-bottom: 2rem;
 }
@@ -373,16 +391,7 @@ textarea:focus {
   color: red;
 }
 
-.fa-chevron-right,
-.fa-chevron-left {
-  font-size: 2.5rem;
-  padding: 1rem;
-}
-
-.fa-chevron-right {
-  margin-left: 3rem;
-}
-
-.fa-chevron-left {
-  margin-right: 3rem;
+#favorites {
+  max-width: 400px;
+  max-height: 400px;
 }
