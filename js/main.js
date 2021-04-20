@@ -114,52 +114,57 @@ function starClick(event) {
   $observationView.className = 'hidden observation-container';
   $weatherView.className = 'hidden';
   $favoriteView.className = 'favorite-container';
-  intervalId = setInterval(slideShow, 5000);
+  intervalId = setInterval(slideShow, 4000);
 }
 
 function slideShow() {
-  if (indexCounter >= observationData.favorites.length) {
-    indexCounter = 0;
-  } else {
+
+  if (
+    observationData.observations[indexCounter].starId &&
+    indexCounter <= observationData.observations.length - 1
+  ) {
     $favoriteImages.setAttribute(
       'src',
-      observationData.favorites[indexCounter].image
+      observationData.observations[indexCounter].image
     );
     indexCounter++;
+  } if
+  (indexCounter >= observationData.observations.length) {
+    indexCounter = 0;
   }
 }
 
 function rightArrowClick(event) {
   clearInterval(intervalId);
-  indexCounter++;
-  if (indexCounter <= observationData.favorites.length - 1) {
+  if (
+    observationData.observations[indexCounter].starId &&
+    indexCounter <= observationData.observations.length - 1
+  ) {
     $favoriteImages.setAttribute(
       'src',
-      observationData.favorites[indexCounter].image
+      observationData.observations[indexCounter].image
     );
-  } else {
+    indexCounter++;
+  } if
+  (indexCounter >= observationData.observations.length) {
     indexCounter = 0;
-    $favoriteImages.setAttribute(
-      'src',
-      observationData.favorites[indexCounter].image
-    );
   }
   intervalId = setInterval(slideShow, 5000);
 }
 
 function leftArrowClick(event) {
   clearInterval(intervalId);
-  indexCounter--;
-  if (indexCounter >= 0) {
+  if (indexCounter >= 0 && observationData.observations[indexCounter].starId) {
     $favoriteImages.setAttribute(
       'src',
-      observationData.favorites[indexCounter].image
+      observationData.observations[indexCounter].image
     );
-  } else {
-    indexCounter = observationData.favorites.length - 1;
+    indexCounter--;
+  } if (indexCounter < 0) {
+    indexCounter = observationData.observations.length - 1;
     $favoriteImages.setAttribute(
       'src',
-      observationData.favorites[indexCounter].image
+      observationData.observations[indexCounter].image
     );
   }
   intervalId = setInterval(slideShow, 5000);
@@ -333,8 +338,7 @@ function viewEditForm(event) {
 }
 
 function starCheck() {
-  if (observationData.editing.starId === true
-  ) {
+  if (observationData.editing.starId) {
     $emptystarBtn.className = 'hidden far fa-star';
     $favoriteStarBtn.className = 'fas fa-star';
   } else {
@@ -343,25 +347,19 @@ function starCheck() {
   }
 }
 function dislikeClick(event) {
-  if (observationData.editing.starId === null);
-  observationData.favorites.push(observationData.editing);
+  if (!observationData.editing.starId);
   $favoriteStarBtn.className = 'fas fa-star';
   $emptystarBtn.className = 'hidden far fa-star';
   observationData.editing.starId = true;
 }
 
 function favoriteClick(event) {
-  for (var i = 0; i < observationData.observations.length; i++) {
-    if (
-      observationData.editing.starId === true &&
-      observationData.observations[i].nextObvId ===
-        observationData.editing.nextObvId
-    );
+  if (!observationId.editing.starId) {
     $emptystarBtn.className = 'far fa-star';
     $favoriteStarBtn.className = 'hidden fas fa-star';
-    observationData.favorites.splice(i, 1);
+  } else {
+    observationId.editing.starId = false;
   }
-  observationData.editing.starId = null;
 }
 
 function deleteModalView(event) {
@@ -383,6 +381,7 @@ function confirmDelete(event) {
       $li[x].remove();
     }
   }
+
   $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
   recordObv.reset();
   observationData.editing = null;
@@ -421,7 +420,7 @@ function getWeatherData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     'GET',
-    'http://api.weatherapi.com/v1/forecast.json?key=747120ab42924582925172532211204&q=' +
+    'https://api.weatherapi.com/v1/forecast.json?key=747120ab42924582925172532211204&q=' +
       weatherData.zipCode +
       '&days=1&aqi=no&alerts=no'
   );

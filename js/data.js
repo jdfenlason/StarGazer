@@ -7,8 +7,7 @@ var observationData = {
   observations: [],
   editing: null,
   nextObvId: 1,
-  view: 'observations',
-  favorites: []
+  view: 'observations'
 };
 
 var astronomyData = {

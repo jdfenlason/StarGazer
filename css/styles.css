@@ -193,7 +193,6 @@ input {
 .image-url {
   width: 100%;
   object-fit: contain;
-  position: relative;
 }
 
 .observation-title {
@@ -370,10 +369,6 @@ textarea:focus {
   padding-bottom: 2rem;
 }
 
-#relative {
-  position: relative;
-}
-
 .star-container {
   display: flex;
   justify-content: space-evenly;
@@ -381,14 +376,6 @@ textarea:focus {
 
 .star-container > i {
   font-size: 2em;
-}
-
-.blue {
-  color: #1a2653;
-}
-
-.red {
-  color: red;
 }
 
 #favorites {
