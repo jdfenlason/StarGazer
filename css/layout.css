@@ -58,12 +58,6 @@ body {
   body {
     min-width: 500px;
   }
-
-  .container,
-  .favorite-container,
-  .container-form {
-    min-height: 111vh;
-  }
 }
 
 @media screen and (min-width: 720px) {

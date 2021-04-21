@@ -3,9 +3,8 @@
 /* global nasaData */
 /* global observationData */
 
-var $zipCodeInput = document.querySelector('.zip-code');
-var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
+var $zipCodeInput = document.querySelector('.zip-code');
 var $headerBookIcon = document.querySelector('#book-header');
 var $headerStarIcon = document.querySelector('#star-header');
 var $headerMoonIcon = document.querySelector('#moon-header');
@@ -14,11 +13,13 @@ var $footerBookIcon = document.querySelector('#book-footer');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $footerPlusIcon = document.querySelector('#plus-footer');
 var $footerStarIcon = document.querySelector('#star-footer');
+
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
 var $favoriteView = document.querySelector('.favorite-container');
 var recordObv = document.querySelector('.observation-form');
 var $observationRecordView = document.querySelector('#observation-list');
+
 var $imageUrl = document.querySelector('.image-url');
 var $newUlobservations = document.querySelector('.list-observations');
 var $observationTitle = document.querySelector('.observation-title');
@@ -26,13 +27,13 @@ var $deleteEntryBtn = document.querySelector('.delete-entry');
 var $viewModal = document.querySelector('.view-modal');
 var $cancelbutton = document.querySelector('.cancel-button');
 var $confirmbutton = document.querySelector('.confirm-button');
-var $pastObvs = document.querySelector('.past-observations');
 var $searchInput = document.querySelector('#user-search');
 var $favoriteStarBtn = document.querySelector('#starBtn');
 var $emptystarBtn = document.querySelector('#emptystarBtn');
 var $favoriteImages = document.querySelector('#favorites');
 var $leftArrow = document.querySelector('.fa-chevron-left');
 var $rightArrow = document.querySelector('.fa-chevron-right');
+
 var indexCounter = 0;
 var observationId = null;
 var intervalId = null;
@@ -43,17 +44,17 @@ $deleteEntryBtn.addEventListener('click', deleteModalView);
 $leftArrow.addEventListener('click', leftArrowClick);
 $rightArrow.addEventListener('click', rightArrowClick);
 $footerPlusIcon.addEventListener('click', plusClick);
-$zipCodeInput.addEventListener('keyup', enterZip);
-window.addEventListener('keypress', submit);
 $footerBookIcon.addEventListener('click', bookClick);
 $footerMoonIcon.addEventListener('click', moonClick);
 $footerStarIcon.addEventListener('click', starClick);
-recordObv.addEventListener('submit', saveObvs);
-window.addEventListener('DOMContentLoaded', loadObservations);
-$newUlobservations.addEventListener('click', editObservationItem);
-$searchInput.addEventListener('keyup', searchInput);
 $emptystarBtn.addEventListener('click', dislikeClick);
+$newUlobservations.addEventListener('click', editObservationItem);
 $favoriteStarBtn.addEventListener('click', favoriteClick);
+
+$searchInput.addEventListener('keyup', searchInput);
+$zipCodeInput.addEventListener('keyup', enterZip);
+window.addEventListener('keyup', submit);
+recordObv.addEventListener('submit', saveObvs);
 
 function moonClick(event) {
   clearInterval(intervalId);
@@ -87,6 +88,7 @@ function plusClick(event) {
 
 function bookClick(event) {
   clearInterval(intervalId);
+  var $pastObvs = document.querySelector('.past-observations');
   $observationView.className = 'hidden observation-container';
   $weatherView.className = 'hidden';
   $favoriteView.className = 'favorite-container hidden';
@@ -477,6 +479,7 @@ function getNasaData() {
 }
 
 function renderData() {
+  var $zipCodeTitle = document.querySelector('.zip-code-title');
   $zipCodeTitle.textContent = $zipCodeInput.value;
 
   var zipcode = document.querySelector('#zipcode');
@@ -540,7 +543,7 @@ function renderData() {
 
   if (nasaData.media_type === 'video') {
     $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
-    imageurl.value = 'images/placeholder.jpeg';
+    imageurl.value = 'images/placeholder.peg';
   }
 
   $zipCodeInput.value = null;
