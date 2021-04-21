@@ -101,7 +101,7 @@ function bookClick(event) {
   observationData.editing = null;
   if (observationData.observations.length === 0) {
     $pastObvs.className = 'past-observations center';
-    $pastObvs.textContent = 'No Observations Have Been Made!';
+    $pastObvs.textContent = 'No Observations!';
   } else {
     $pastObvs.className = 'past-observations';
     $pastObvs.textContent = 'Observations:';

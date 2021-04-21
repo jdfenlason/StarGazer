@@ -173,6 +173,10 @@ input {
   padding: 0 1.5rem;
 }
 
+.height {
+  min-height: 750px;
+}
+
 .label-container {
   padding: 0 1rem;
 }
