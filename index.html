@@ -41,9 +41,10 @@
         <div class="column-full">
           <div class="header-container">
             <h2>StarGazer</h2>
-            <i id="header-moon" class="fas fa-cloud-moon"></i>
+            <i id="moon-header" class="fas fa-cloud-moon"></i>
             <i id="book-header" class="fas fa-book hidden"></i>
             <i id="plus-header" class="fas fa-plus hidden"></i>
+            <i id="star-header" class="fas fa-star hidden"></i>
           </div>
         </div>
       </div>
@@ -163,7 +164,7 @@
               <input type="text" name="date" placeholder="Date" id="date" />
               <label for="time">time</label>
               <input type="text" name="time" placeholder="Time" id="time" />
-              <label for="lunarPhase">LunarPhase</label>
+              <label for="lunarPhase">Lunar Phase</label>
               <input
                 type="text"
                 name="lunarPhase"
@@ -173,11 +174,11 @@
             </div>
 
             <div class="column-full label-container">
-              <label for="user-imageUrl">Image-url</label>
+              <label for="user-imageUrl">Image URL</label>
               <input
                 type="url"
                 name="image"
-                placeholder="Image-url"
+                placeholder="Image URL"
                 id="user-imageUrl"
               />
               <label for="observations">observations</label>
@@ -192,6 +193,8 @@
             </div>
             <div class="column-full form-submit">
               <button class="invisible delete-entry">Delete Observation</button>
+              <i id="emptystarBtn" class="hidden far fa-star"></i>
+              <i id="starBtn" class="invisible hidden fas fa-star"></i>
               <button class="record-button" type="submit">RECORD</button>
             </div>
           </div>
@@ -199,8 +202,7 @@
       </div>
 
       <div id="observation-list" class="hidden" data-view="observations">
-        <div class ="container-form">
-
+        <div class="container-form">
           <div class="form-container">
             <div class="row">
               <div class="column-full">
@@ -210,11 +212,11 @@
                   <div class="search-icon-container">
                     <i class="fas fa-search"></i>
                     <input
-                    required
-                    name="search"
-                    type="text"
-                    id="user-search"
-                    placeholder="Search"
+                      required
+                      name="search"
+                      type="text"
+                      id="user-search"
+                      placeholder="Search"
                     />
                   </div>
                 </div>
@@ -223,16 +225,45 @@
             <ul class="list-observations"></ul>
           </div>
         </div>
+      </div>
+
+      <div class="hidden favorite-container" data-view="favorites">
+        <div class="container-form">
+          <div class="row">
+            <div class="column-full">
+              <div class="favorites-header">
+                <h1 class = "fav-h1">Favorites:</h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+
+              <div class="favorite-image-container">
+                <i class="fas fa-chevron-left"></i>
+
+                <div class="icon-image-container">
+                  <img
+                    class="image-url"
+                    id="favorites"
+                    src="images/placeholder.jpeg"
+                    alt="stars"
+                  />
+                </div>
+                <i class="fas fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
 
       </div>
 
       <div class="row">
         <div class="column-full">
           <div class="icon-container">
+            <i id="moon-footer" class="fas fa-cloud-moon"></i>
             <i id="plus-footer" class="fas fa-plus"></i>
             <i id="book-footer" class="fas fa-book"></i>
-            <i id="moon-footer" class="fas fa-cloud-moon"></i>
-            <i class="fas fa-star"></i>
+            <i id="star-footer" class="fas fa-star"></i>
           </div>
         </div>
       </div>

@@ -3,67 +3,102 @@
 /* global nasaData */
 /* global observationData */
 
-var $zipCodeInput = document.querySelector('.zip-code');
-var $zipCodeTitle = document.querySelector('.zip-code-title');
 var $loading = document.querySelector('.fa-moon');
+var $zipCodeInput = document.querySelector('.zip-code');
 var $headerBookIcon = document.querySelector('#book-header');
+var $headerStarIcon = document.querySelector('#star-header');
+var $headerMoonIcon = document.querySelector('#moon-header');
+var $headerPlusIcon = document.querySelector('#plus-header');
 var $footerBookIcon = document.querySelector('#book-footer');
-var $headerMoonIcon = document.querySelector('#header-moon');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $footerPlusIcon = document.querySelector('#plus-footer');
+var $footerStarIcon = document.querySelector('#star-footer');
+
 var $observationView = document.querySelector('.observation-container');
 var $weatherView = document.querySelector('.container');
+var $favoriteView = document.querySelector('.favorite-container');
 var recordObv = document.querySelector('.observation-form');
 var $observationRecordView = document.querySelector('#observation-list');
+
 var $imageUrl = document.querySelector('.image-url');
 var $newUlobservations = document.querySelector('.list-observations');
-var observationId = null;
 var $observationTitle = document.querySelector('.observation-title');
 var $deleteEntryBtn = document.querySelector('.delete-entry');
 var $viewModal = document.querySelector('.view-modal');
 var $cancelbutton = document.querySelector('.cancel-button');
 var $confirmbutton = document.querySelector('.confirm-button');
-var $pastObvs = document.querySelector('.past-observations');
 var $searchInput = document.querySelector('#user-search');
+var $favoriteStarBtn = document.querySelector('#starBtn');
+var $emptystarBtn = document.querySelector('#emptystarBtn');
+var $favoriteImages = document.querySelector('#favorites');
+var $leftArrow = document.querySelector('.fa-chevron-left');
+var $rightArrow = document.querySelector('.fa-chevron-right');
 
+var indexCounter = 0;
+var observationId = null;
+var intervalId = null;
+
+$cancelbutton.addEventListener('click', hideModal);
 $confirmbutton.addEventListener('click', confirmDelete);
 $deleteEntryBtn.addEventListener('click', deleteModalView);
-$cancelbutton.addEventListener('click', hideModal);
-
+$leftArrow.addEventListener('click', leftArrowClick);
+$rightArrow.addEventListener('click', rightArrowClick);
 $footerPlusIcon.addEventListener('click', plusClick);
-$zipCodeInput.addEventListener('keyup', enterZip);
-window.addEventListener('keypress', submit);
 $footerBookIcon.addEventListener('click', bookClick);
 $footerMoonIcon.addEventListener('click', moonClick);
-recordObv.addEventListener('submit', saveObvs);
-window.addEventListener('DOMContentLoaded', loadObservations);
+$footerStarIcon.addEventListener('click', starClick);
+$emptystarBtn.addEventListener('click', dislikeClick);
 $newUlobservations.addEventListener('click', editObservationItem);
+$favoriteStarBtn.addEventListener('click', favoriteClick);
+
 $searchInput.addEventListener('keyup', searchInput);
-function plusClick() {
-  $observationView.className = 'observation-container';
-  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
-  $headerBookIcon.className = 'fas fa-plus';
-  $weatherView.className = 'hidden';
-  $deleteEntryBtn.className = 'invisible delete-entry';
-  $observationTitle.textContent = 'New Observation:';
-  observationData.view = 'observation-form';
-  $observationRecordView.className = 'hidden';
-}
+$zipCodeInput.addEventListener('keyup', enterZip);
+window.addEventListener('keyup', submit);
+recordObv.addEventListener('submit', saveObvs);
 
 function moonClick(event) {
+  clearInterval(intervalId);
   $headerBookIcon.className = 'fas fa-book hidden';
   $headerMoonIcon.className = 'fas fa-cloud-moon';
+  $headerPlusIcon.className = 'fas fa-plus hidden';
+  $headerStarIcon.className = 'fas fa-star hidden';
+  $favoriteView.className = 'favorite-container hidden';
   $observationView.className = 'hidden observation-container';
   $weatherView.className = 'container';
   $observationRecordView.className = 'hidden';
+  observationData.editing = null;
 }
+
+function plusClick(event) {
+  clearInterval(intervalId);
+  $observationView.className = 'observation-container';
+  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
+  $headerBookIcon.className = 'fas fa-book hidden';
+  $headerPlusIcon.className = 'fas fa-plus';
+  $headerStarIcon.className = 'fas fa-star hidden';
+  $weatherView.className = 'hidden';
+  $deleteEntryBtn.className = 'invisible delete-entry';
+  $emptystarBtn.className = 'hidden far fa-star';
+  $favoriteStarBtn.className = 'hidden fas fa-star';
+  $observationTitle.textContent = 'New Observation:';
+  observationData.view = 'observation-form';
+  $observationRecordView.className = 'hidden';
+  $favoriteView.className = 'favorite-container hidden';
+}
+
 function bookClick(event) {
+  clearInterval(intervalId);
+  var $pastObvs = document.querySelector('.past-observations');
   $observationView.className = 'hidden observation-container';
+  $weatherView.className = 'hidden';
+  $favoriteView.className = 'favorite-container hidden';
   $observationRecordView.className = 'observation-record';
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerBookIcon.className = 'fas fa-book';
-  $weatherView.className = 'hidden';
+  $headerPlusIcon.className = 'fas fa-plus hidden';
+  $headerStarIcon.className = 'fas fa-star hidden';
   observationData.view = 'observations';
+  observationData.editing = null;
   if (observationData.observations.length === 0) {
     $pastObvs.className = 'past-observations center';
     $pastObvs.textContent = 'No Observations Have Been Made!';
@@ -72,16 +107,69 @@ function bookClick(event) {
     $pastObvs.textContent = 'Observations:';
   }
 }
-function viewEditForm(event) {
-  $observationView.className = 'observation-container';
-  $weatherView.className = 'hidden';
+function starClick(event) {
+  $headerBookIcon.className = 'fas fa-book hidden';
+  $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
+  $headerPlusIcon.className = 'fas fa-plus hidden';
+  $headerStarIcon.className = 'fas fa-star';
   $observationRecordView.className = 'hidden';
-  $observationTitle.textContent = 'Edit Observation';
-  $deleteEntryBtn.className = 'delete-entry';
+  $observationView.className = 'hidden observation-container';
+  $weatherView.className = 'hidden';
+  $favoriteView.className = 'favorite-container';
+  intervalId = setInterval(slideShow, 8000);
 }
 
-function hideModal(event) {
-  $viewModal.className = 'hidden view-modal';
+function slideShow() {
+  if (
+    observationData.observations[indexCounter].starId &&
+    indexCounter <= observationData.observations.length - 1
+  ) {
+    $favoriteImages.setAttribute(
+      'src',
+      observationData.observations[indexCounter].image
+    );
+    indexCounter++;
+  }
+  if (indexCounter >= observationData.observations.length) {
+    indexCounter = 0;
+  }
+}
+
+function rightArrowClick(event) {
+  clearInterval(intervalId);
+  if (
+    observationData.observations[indexCounter].starId &&
+    indexCounter <= observationData.observations.length - 1
+  ) {
+    $favoriteImages.setAttribute(
+      'src',
+      observationData.observations[indexCounter].image
+    );
+    indexCounter++;
+  }
+  if (indexCounter >= observationData.observations.length) {
+    indexCounter = 0;
+  }
+  intervalId = setInterval(slideShow, 8000);
+}
+
+function leftArrowClick(event) {
+  clearInterval(intervalId);
+  if (indexCounter >= 0 && observationData.observations[indexCounter].starId) {
+    $favoriteImages.setAttribute(
+      'src',
+      observationData.observations[indexCounter].image
+    );
+    indexCounter--;
+  }
+  if (indexCounter < 0) {
+    indexCounter = observationData.observations.length - 1;
+    $favoriteImages.setAttribute(
+      'src',
+      observationData.observations[indexCounter].image
+    );
+  }
+  intervalId = setInterval(slideShow, 8000);
 }
 
 function searchInput(event) {
@@ -140,16 +228,16 @@ function saveObvs(event) {
         observationData.observations[i].nextObvId ===
         observationData.editing.nextObvId
       ) {
-        observationData[i] = observationData.editing;
+        observationData.observations[i] = observationData.editing;
+        var $observationNode = document.querySelectorAll('.observation-entry');
+        var editObservationItem = createObservation(observationData.editing);
+        $observationNode[i].replaceWith(editObservationItem);
       }
-      var $observationNode = document.querySelectorAll('.observation-entry');
-      var editObservationItem = createObservation(observationData.editing);
-      $observationNode[i].replaceWith(editObservationItem);
     }
   }
-  bookClick();
   recordObv.reset();
   observationData.editing = null;
+  bookClick();
 }
 
 function createObservation(entry) {
@@ -215,14 +303,14 @@ function loadObservations(event) {
 }
 
 function editObservationItem(event) {
-  if (event.target.matches('i')) {
+  if (event.target.matches('.fa-edit')) {
+    viewEditForm();
     var closestObservation = event.target.closest('.observation-entry');
     observationId = closestObservation.getAttribute('observation-data-id');
     for (var i = 0; i < observationData.observations.length; i++) {
       if (
         observationData.observations[i].nextObvId.toString() === observationId
       ) {
-        viewEditForm();
         observationData.editing = observationData.observations[i];
         recordObv.elements.zipcode.value = observationData.editing.zipcode;
         recordObv.elements.location.value = observationData.editing.location;
@@ -234,8 +322,45 @@ function editObservationItem(event) {
         $imageUrl.setAttribute('src', observationData.editing.image);
         recordObv.elements.observations.value =
           observationData.editing.observations;
+        starCheck();
       }
     }
+  }
+}
+
+function viewEditForm(event) {
+  clearInterval(intervalId);
+  $favoriteStarBtn.className = 'hidden fa-star';
+  $emptystarBtn.className = 'far fa-star';
+  $observationView.className = 'observation-container';
+  $weatherView.className = 'hidden';
+  $observationRecordView.className = 'hidden';
+  $observationTitle.textContent = 'Edit Observation';
+  $deleteEntryBtn.className = 'delete-entry';
+}
+
+function starCheck() {
+  if (observationData.editing.starId) {
+    $emptystarBtn.className = 'hidden far fa-star';
+    $favoriteStarBtn.className = 'fas fa-star';
+  } else {
+    $emptystarBtn.className = 'far fa-star';
+    $favoriteStarBtn.className = 'hidden fas fa-star';
+  }
+}
+function dislikeClick(event) {
+  if (!observationData.editing.starId);
+  $favoriteStarBtn.className = 'fas fa-star';
+  $emptystarBtn.className = 'hidden far fa-star';
+  observationData.editing.starId = true;
+}
+
+function favoriteClick(event) {
+  if (!observationId.editing.starId) {
+    $emptystarBtn.className = 'far fa-star';
+    $favoriteStarBtn.className = 'hidden fas fa-star';
+  } else {
+    observationId.editing.starId = false;
   }
 }
 
@@ -251,18 +376,23 @@ function confirmDelete(event) {
     ) {
       observationData.observations.splice(i, 1);
     }
-    var $li = document.querySelectorAll('li');
-    for (var x = 0; x < $li.length; x++) {
-      if ($li[x].getAttribute('observation-data-id') === observationId) {
-        $li[x].remove();
-      }
+  }
+  var $li = document.querySelectorAll('li');
+  for (var x = 0; x < $li.length; x++) {
+    if ($li[x].getAttribute('observation-data-id') === observationId) {
+      $li[x].remove();
     }
   }
+
   $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
   recordObv.reset();
   observationData.editing = null;
   hideModal();
   bookClick();
+}
+
+function hideModal(event) {
+  $viewModal.className = 'hidden view-modal';
 }
 
 function enterZip(event) {
@@ -292,7 +422,7 @@ function getWeatherData() {
   var xhr = new XMLHttpRequest();
   xhr.open(
     'GET',
-    'http://api.weatherapi.com/v1/forecast.json?key=747120ab42924582925172532211204&q=' +
+    'https://api.weatherapi.com/v1/forecast.json?key=747120ab42924582925172532211204&q=' +
       weatherData.zipCode +
       '&days=1&aqi=no&alerts=no'
   );
@@ -349,6 +479,7 @@ function getNasaData() {
 }
 
 function renderData() {
+  var $zipCodeTitle = document.querySelector('.zip-code-title');
   $zipCodeTitle.textContent = $zipCodeInput.value;
 
   var zipcode = document.querySelector('#zipcode');
@@ -412,12 +543,11 @@ function renderData() {
 
   if (nasaData.media_type === 'video') {
     $imageUrl.setAttribute('src', 'images/placeholder.jpeg');
-    imageurl.value = 'images/placeholder.jpeg';
+    imageurl.value = 'images/placeholder.peg';
   }
 
   $zipCodeInput.value = null;
   nasaData.image = null;
   spinIcon();
 }
-
 window.addEventListener('DOMContentLoaded', loadObservations);

@@ -9,6 +9,7 @@ var observationData = {
   nextObvId: 1,
   view: 'observations'
 };
+
 var astronomyData = {
   zipCode: null
 };

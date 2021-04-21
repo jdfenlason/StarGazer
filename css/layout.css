@@ -1,6 +1,13 @@
 .row {
   display: flex;
   flex-wrap: wrap;
+  min-width: 100%;
+}
+
+body {
+  background-color: #244a80;
+  color: #fff;
+  font-family: "Open sans", sans-serif;
 }
 
 .column-full {
@@ -14,10 +21,6 @@
 
 .column-third {
   flex-basis: calc(100% / 3);
-}
-
-.column-7 {
-  width: 75%;
 }
 
 .card-1,
@@ -35,23 +38,35 @@
   .card-3 {
     padding: 0.6rem;
   }
-}
 
-@media screen and (min-width: 720px) {
   .header-container {
     justify-content: space-between;
   }
 
+  .header-container > h2 {
+    padding-left: 2rem;
+  }
+
+  .header-container > i {
+    padding-right: 3.5rem;
+  }
+
+  .column-7 {
+    max-width: 75%;
+  }
+
+  body {
+    min-width: 500px;
+  }
+}
+
+@media screen and (min-width: 720px) {
   .header-container > i {
     margin-right: 1rem;
   }
 
   body {
     height: 100%;
-  }
-
-  .row {
-    width: 100%;
   }
 
   .header-container > h2 {
@@ -66,10 +81,5 @@
 
   .column-half {
     width: 100%;
-  }
-
-  .container-form {
-    min-height: 900px;
-    min-width: 500px;
   }
 }
