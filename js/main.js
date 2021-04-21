@@ -114,11 +114,10 @@ function starClick(event) {
   $observationView.className = 'hidden observation-container';
   $weatherView.className = 'hidden';
   $favoriteView.className = 'favorite-container';
-  intervalId = setInterval(slideShow, 4000);
+  intervalId = setInterval(slideShow, 8000);
 }
 
 function slideShow() {
-
   if (
     observationData.observations[indexCounter].starId &&
     indexCounter <= observationData.observations.length - 1
@@ -128,8 +127,8 @@ function slideShow() {
       observationData.observations[indexCounter].image
     );
     indexCounter++;
-  } if
-  (indexCounter >= observationData.observations.length) {
+  }
+  if (indexCounter >= observationData.observations.length) {
     indexCounter = 0;
   }
 }
@@ -145,11 +144,11 @@ function rightArrowClick(event) {
       observationData.observations[indexCounter].image
     );
     indexCounter++;
-  } if
-  (indexCounter >= observationData.observations.length) {
+  }
+  if (indexCounter >= observationData.observations.length) {
     indexCounter = 0;
   }
-  intervalId = setInterval(slideShow, 5000);
+  intervalId = setInterval(slideShow, 8000);
 }
 
 function leftArrowClick(event) {
@@ -160,14 +159,15 @@ function leftArrowClick(event) {
       observationData.observations[indexCounter].image
     );
     indexCounter--;
-  } if (indexCounter < 0) {
+  }
+  if (indexCounter < 0) {
     indexCounter = observationData.observations.length - 1;
     $favoriteImages.setAttribute(
       'src',
       observationData.observations[indexCounter].image
     );
   }
-  intervalId = setInterval(slideShow, 5000);
+  intervalId = setInterval(slideShow, 8000);
 }
 
 function searchInput(event) {

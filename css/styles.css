@@ -363,7 +363,7 @@ textarea:focus {
   display: flex;
   justify-content: center;
   width: 100%;
-  min-height: 350px;
+  min-height: 600px;
   object-fit: contain;
   align-items: center;
   padding-bottom: 2rem;
@@ -379,6 +379,11 @@ textarea:focus {
 }
 
 #favorites {
-  max-width: 400px;
-  max-height: 400px;
+  max-width: 75vh;
+  max-height: 85vh;
+  min-width: 35vh;
+}
+
+.fav-h1 {
+  padding-left: 2rem;
 }

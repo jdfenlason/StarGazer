@@ -39,6 +39,18 @@ body {
     padding: 0.6rem;
   }
 
+  .header-container {
+    justify-content: space-between;
+  }
+
+  .header-container > h2 {
+    padding-left: 2rem;
+  }
+
+  .header-container > i {
+    padding-right: 3.5rem;
+  }
+
   .column-7 {
     max-width: 75%;
   }
@@ -47,16 +59,14 @@ body {
     min-width: 500px;
   }
 
+  .container,
+  .favorite-container,
   .container-form {
-    min-height: 80vh;
+    min-height: 111vh;
   }
 }
 
 @media screen and (min-width: 720px) {
-  .header-container {
-    justify-content: space-between;
-  }
-
   .header-container > i {
     margin-right: 1rem;
   }
