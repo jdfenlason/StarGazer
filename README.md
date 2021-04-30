@@ -1,3 +1,1 @@
-# ajax-project
-
-A dynamic HTML, CSS, and JavaScript solo project.
+StarGazer is a web app to assist novice astronomers in streamlining their observations and keeping observations maintained and organized in one place.  Ever go star watching?  A good StarGazer will understand that it is hard to take notes while out in the field.  Don't worry; StarGazer is here to help you while also limiting eye strain.  With a well-designed color palette, StarGazer reduces the need for clunky flashlights and handwritten notes.  A dynamic, AJAX, HTML, CSS, and JavaScript.
