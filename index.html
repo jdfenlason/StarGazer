@@ -47,11 +47,11 @@
     </header>
 
       <div class="container row" data-view="weather">
-        <div class="">
+        <div class="row">
           <div class="column-full">
             <div class="weather-container">
               <div class="weather-title">
-                <h1>Weather:</h1>
+                <h1>Weather</h1>
               </div>
               <div class="zip-code-title"></div>
               <div class="latitude"></div>
@@ -197,7 +197,7 @@
         </form>
       </div>
 
-      <div id="observation-list" class="hidden" data-view="observations">
+      <div id="observation-list" class="hidden observation-record" data-view="observations">
         <div class="container-form">
           <div class="form-container">
                   <h1 class="past-observations center">Observations:</h1>
@@ -219,9 +219,9 @@
       <div class="hidden favorite-container" data-view="favorites">
         <div class="container-form">
 
+          <div class="favorites-header">
+            <h1 class = "fav-h1">Favorites</h1>
             <div class="column-full">
-              <div class="favorites-header">
-                <h1 class = "fav-h1">Favorites:</h1>
               </div>
             </div>
 
@@ -230,16 +230,16 @@
 
             <div class="favorite-image-container row">
 
+
+
+              <img
+                  class="image-url"
+                  id="favorites"
+                  src="images/placeholder.jpeg"
+                  alt="stars"
+                  />
                   <i class="fas fa-chevron-left"></i>
                   <i class="fas fa-chevron-right"></i>
-          
-
-                  <img
-                  class="image-url"
-                    id="favorites"
-                    src="images/placeholder.jpeg"
-                    alt="stars"
-                    />
               </div>
             </div>
           </div>
