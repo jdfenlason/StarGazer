@@ -8,6 +8,9 @@ body {
   background-color: #244a80;
   color: #fff;
   font-family: "Open sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
 }
 
 .column-full {
@@ -53,10 +56,6 @@ body {
 
   .column-7 {
     max-width: 75%;
-  }
-
-  body {
-    min-width: 500px;
   }
 }
 
