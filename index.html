@@ -37,21 +37,17 @@
     </div>
 
     <header>
-      <div class="row">
-        <div class="column-full">
-          <div class="header-container">
+      <div class="row header-container">
             <h2>StarGazer</h2>
             <i id="moon-header" class="fas fa-cloud-moon"></i>
             <i id="book-header" class="fas fa-book hidden"></i>
             <i id="plus-header" class="fas fa-plus hidden"></i>
             <i id="star-header" class="fas fa-star hidden"></i>
-          </div>
-        </div>
       </div>
     </header>
-    <main>
-      <div class="container" data-view="weather">
-        <div class="row">
+
+      <div class="container row" data-view="weather">
+        <div class="">
           <div class="column-full">
             <div class="weather-container">
               <div class="weather-title">
@@ -203,13 +199,9 @@
 
       <div id="observation-list" class="hidden" data-view="observations">
         <div class="container-form">
-          <div class="form-container height">
-            <div class="row">
-              <div class="column-full">
-                <div class="search-header">
+          <div class="form-container">
                   <h1 class="past-observations center">Observations:</h1>
-
-                  <div class="search-icon-container">
+                  <div class="search-icon-container center">
                     <i class="fas fa-search"></i>
                     <input
                       required
@@ -223,41 +215,37 @@
               </div>
             </div>
             <ul class="list-observations"></ul>
-          </div>
-        </div>
-      </div>
 
       <div class="hidden favorite-container" data-view="favorites">
         <div class="container-form">
-          <div class="row">
+
             <div class="column-full">
               <div class="favorites-header">
                 <h1 class = "fav-h1">Favorites:</h1>
               </div>
             </div>
-          </div>
 
-          <div class="row">
 
-              <div class="favorite-image-container">
-                <i class="fas fa-chevron-left"></i>
 
-                <div class="icon-image-container">
+
+            <div class="favorite-image-container row">
+
+                  <i class="fas fa-chevron-left"></i>
+                  <i class="fas fa-chevron-right"></i>
+          
+
                   <img
-                    class="image-url"
+                  class="image-url"
                     id="favorites"
                     src="images/placeholder.jpeg"
                     alt="stars"
-                  />
-                </div>
-                <i class="fas fa-chevron-right"></i>
+                    />
               </div>
             </div>
           </div>
 
-      </div>
 
-      <div class="row">
+      <div class="footer-container row">
         <div class="column-full">
           <div class="icon-container">
             <i id="moon-footer" class="fas fa-cloud-moon"></i>
@@ -267,7 +255,6 @@
           </div>
         </div>
       </div>
-    </main>
 
     <script src="js/data.js"></script>
     <script src="js/main.js"></script>
