@@ -80,7 +80,7 @@ function plusClick(event) {
   $deleteEntryBtn.className = 'invisible delete-entry';
   $emptystarBtn.className = 'hidden far fa-star';
   $favoriteStarBtn.className = 'hidden fas fa-star';
-  $observationTitle.textContent = 'New Observation:';
+  $observationTitle.textContent = 'New Observation';
   observationData.view = 'observation-form';
   $observationRecordView.className = 'hidden';
   $favoriteView.className = 'favorite-container hidden';
@@ -103,8 +103,8 @@ function bookClick(event) {
     $pastObvs.className = 'past-observations center';
     $pastObvs.textContent = 'No Observations!';
   } else {
-    $pastObvs.className = 'past-observations';
-    $pastObvs.textContent = 'Observations:';
+    $pastObvs.className = 'past-observations center';
+    $pastObvs.textContent = 'Observations';
   }
 }
 function starClick(event) {
@@ -118,7 +118,6 @@ function starClick(event) {
   $favoriteView.className = 'favorite-container';
   intervalId = setInterval(slideShow, 8000);
 }
-
 function slideShow() {
   if (
     observationData.observations[indexCounter].starId &&
@@ -132,9 +131,12 @@ function slideShow() {
   }
   if (indexCounter >= observationData.observations.length) {
     indexCounter = 0;
+    $favoriteImages.setAttribute(
+      'src',
+      observationData.observations[indexCounter.image]
+    );
   }
 }
-
 function rightArrowClick(event) {
   clearInterval(intervalId);
   if (
@@ -149,6 +151,8 @@ function rightArrowClick(event) {
   }
   if (indexCounter >= observationData.observations.length) {
     indexCounter = 0;
+  } else {
+    indexCounter++;
   }
   intervalId = setInterval(slideShow, 8000);
 }
@@ -168,6 +172,8 @@ function leftArrowClick(event) {
       'src',
       observationData.observations[indexCounter].image
     );
+  } else {
+    indexCounter--;
   }
   intervalId = setInterval(slideShow, 8000);
 }
