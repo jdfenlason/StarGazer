@@ -15,7 +15,6 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 
 .header-container {
@@ -190,6 +189,9 @@ input {
   flex-direction: column;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+.center-align: {
   align-items: center;
 }
 
@@ -214,7 +216,7 @@ input {
 .observation-title {
   color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-top: 0;
   margin-bottom: 2rem;
   padding: 1rem;
@@ -337,10 +339,13 @@ textarea:focus {
 }
 
 .past-observations {
-  padding-left: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.favorites-header {
+  text-align: center;
 }
 
 .center {
