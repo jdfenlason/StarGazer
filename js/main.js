@@ -250,18 +250,25 @@ function createObservation(entry) {
   observationheader.setAttribute('class', 'observation-header');
   var h2 = document.createElement('h2');
   h2.setAttribute('class', 'post-location');
+  var span = document.createElement('span');
+  span.textContent = 'Location:';
   h2.textContent = entry.location;
 
   var pdate = document.createElement('p');
   pdate.setAttribute('class', 'post-date');
-  pdate.textContent = entry.date;
+  var dateSpan = document.createElement('span');
+  dateSpan.textContent = 'Date:';
+  pdate.textContent = `${entry.date} ${entry.time}`;
 
   var pzip = document.createElement('p');
   pzip.setAttribute('class', 'post-zip');
   pzip.textContent = entry.zipcode;
 
+  var atag = document.createElement('a');
   var editIcon = document.createElement('i');
   editIcon.setAttribute('class', 'fas fa-edit');
+  atag.setAttribute('class', 'tab');
+  atag.href = '#observation-form';
 
   var pElement = document.createElement('p');
   pElement.textContent = entry.observations;
@@ -270,10 +277,13 @@ function createObservation(entry) {
   plunar.textContent = entry.observations;
 
   observationheader.appendChild(h2);
-  observationheader.appendChild(editIcon);
+  observationheader.appendChild(atag);
+  atag.appendChild(editIcon);
   columnhalf2.appendChild(observationheader);
+  columnhalf2.appendChild(dateSpan);
   columnhalf2.appendChild(pdate);
-  columnhalf2.appendChild(pzip);
+  columnhalf2.appendChild(span);
+  span.appendChild(pzip);
   columnhalf2.appendChild(pElement);
   columnhalf1.appendChild(img);
   row.appendChild(columnhalf1);
