@@ -19,6 +19,7 @@ var recordObv = document.querySelector('.observation-form');
 var $imageUrl = document.querySelector('.image-url');
 var $newUlobservations = document.querySelector('.list-observations');
 var $observationTitle = document.querySelector('.observation-title');
+var $warningMessage = document.querySelector('.warning');
 var $deleteEntryBtn = document.querySelector('.delete-entry');
 var $viewModal = document.querySelector('.view-modal');
 var $cancelbutton = document.querySelector('.cancel-button');
@@ -71,6 +72,11 @@ function plusClick(event) {
   $emptystarBtn.className = 'hidden far fa-star';
   $favoriteStarBtn.className = 'hidden fas fa-star';
   $observationTitle.textContent = 'New Observation';
+  if (recordObv.elements.zipcode.value.length === 0) {
+    $warningMessage.textContent = 'Please Enter Zipcode at Home Page first';
+  } else {
+    $warningMessage.textContent = '';
+  }
 }
 
 function bookClick(event) {
@@ -192,11 +198,12 @@ function saveObvs(event) {
     userInput.time = recordObv.elements.time.value;
     userInput.lunarPhase = weatherData.moon_phase;
     userInput.moonrise = weatherData.moonrise;
+    userInput.moonset = weatherData.moonset;
+    userInput.moonIll = weatherData.moon_illumination;
     userInput.sunset = weatherData.sunset;
     userInput.moonDistance = astronomyData.moon_distance;
     userInput.temp = weatherData.temp;
     userInput.wind = weatherData.wind;
-    userInput.dayLength = weatherData;
     userInput.image = recordObv.elements.image.value;
     userInput.observations = recordObv.elements.observations.value;
     observationData.observations.unshift(userInput);
@@ -250,19 +257,28 @@ function createObservation(entry) {
   observationheader.setAttribute('class', 'observation-header');
   var h2 = document.createElement('h2');
   h2.setAttribute('class', 'post-location');
-  var span = document.createElement('span');
-  span.textContent = 'Location:';
-  h2.textContent = entry.location;
+
+  h2.textContent = `Location: ${entry.location}`;
 
   var pdate = document.createElement('p');
   pdate.setAttribute('class', 'post-date');
-  var dateSpan = document.createElement('span');
-  dateSpan.textContent = 'Date:';
-  pdate.textContent = `${entry.date} ${entry.time}`;
+  pdate.textContent = `Date & Time: ${entry.date} ${entry.time}`;
 
-  var pzip = document.createElement('p');
-  pzip.setAttribute('class', 'post-zip');
-  pzip.textContent = entry.zipcode;
+  var pTemp = document.createElement('p');
+  pTemp.setAttribute('class', 'post-zip');
+  pTemp.textContent = `Temp. & Wind: ${entry.temp} ${entry.wind}`;
+
+  var pMoonrise = document.createElement('p');
+  pMoonrise.textContent = `Moonrise: ${entry.moonrise}`;
+
+  var pMoonset = document.createElement('p');
+  pMoonset.textContent = `Moonset: ${entry.moonset}`;
+
+  var pMoonIll = document.createElement('p');
+  pMoonIll.textContent = `Moon Illumination: ${entry.moonIll}`;
+
+  var pDayLength = document.createElement('p');
+  pDayLength.textContent = `Day Length: ${entry.dayLength} Hrs.`;
 
   var atag = document.createElement('a');
   var editIcon = document.createElement('i');
@@ -271,19 +287,26 @@ function createObservation(entry) {
   atag.href = '#observation-form';
 
   var pElement = document.createElement('p');
-  pElement.textContent = entry.observations;
+  pElement.textContent = `Observations: ${entry.observations}`;
 
   var plunar = document.createElement('p');
-  plunar.textContent = entry.observations;
+  plunar.textContent = `Lunar Phase: ${entry.lunarPhase}`;
+
+  var pSunset = document.createElement('p');
+  pSunset.textContent = `Sunset: ${entry.sunset}`;
 
   observationheader.appendChild(h2);
   observationheader.appendChild(atag);
   atag.appendChild(editIcon);
   columnhalf2.appendChild(observationheader);
-  columnhalf2.appendChild(dateSpan);
   columnhalf2.appendChild(pdate);
-  columnhalf2.appendChild(span);
-  span.appendChild(pzip);
+  columnhalf2.appendChild(pTemp);
+  columnhalf2.appendChild(pDayLength);
+  columnhalf2.appendChild(pSunset);
+  columnhalf2.appendChild(pMoonrise);
+  columnhalf2.appendChild(pMoonset);
+  columnhalf2.appendChild(plunar);
+  columnhalf2.appendChild(pMoonIll);
   columnhalf2.appendChild(pElement);
   columnhalf1.appendChild(img);
   row.appendChild(columnhalf1);
