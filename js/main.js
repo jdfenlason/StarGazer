@@ -73,7 +73,7 @@ function plusClick(event) {
   $favoriteStarBtn.className = 'hidden fas fa-star';
   $observationTitle.textContent = 'New Observation';
   if (recordObv.elements.zipcode.value.length === 0) {
-    $warningMessage.textContent = 'Please Enter Zipcode at Home Page first';
+    $warningMessage.textContent = 'Please Enter Zipcode at Home Page';
   } else {
     $warningMessage.textContent = '';
   }
@@ -235,6 +235,7 @@ function saveObvs(event) {
     }
   }
   recordObv.reset();
+  $warningMessage.textContent = 'Please Enter Zipcode at Home Page';
   observationData.editing = null;
   bookClick();
 }
