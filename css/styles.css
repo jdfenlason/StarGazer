@@ -6,8 +6,7 @@
   display: none;
 }
 
-.favorite-container,
-.container {
+.view {
   min-height: 90vh;
 }
 
@@ -50,7 +49,7 @@
 .fa-book,
 .fa-star,
 .fa-cloud-moon {
-  font-size: 3rem;
+  font-size: 3em;
   padding: 1rem;
 }
 
@@ -413,4 +412,9 @@ textarea:focus {
 a {
   color: inherit;
   text-decoration-line: none;
+}
+
+.past-observations > p {
+  margin-top: 1rem;
+  margin-bottom: 0;
 }

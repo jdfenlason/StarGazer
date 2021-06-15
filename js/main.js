@@ -14,11 +14,7 @@ var $footerMoonIcon = document.querySelector('#moon-footer');
 var $footerPlusIcon = document.querySelector('#plus-footer');
 var $footerStarIcon = document.querySelector('#star-footer');
 
-var $observationView = document.querySelector('.observation-container');
-var $weatherView = document.querySelector('.container');
-var $favoriteView = document.querySelector('.favorite-container');
 var recordObv = document.querySelector('.observation-form');
-var $observationRecordView = document.querySelector('#observation-list');
 
 var $imageUrl = document.querySelector('.image-url');
 var $newUlobservations = document.querySelector('.list-observations');
@@ -62,43 +58,28 @@ function moonClick(event) {
   $headerMoonIcon.className = 'fas fa-cloud-moon';
   $headerPlusIcon.className = 'fas fa-plus hidden';
   $headerStarIcon.className = 'fas fa-star hidden';
-  $favoriteView.className = 'favorite-container hidden';
-  $observationView.className = 'hidden observation-container';
-  $weatherView.className = 'container';
-  $observationRecordView.className = 'hidden';
   observationData.editing = null;
 }
 
 function plusClick(event) {
   clearInterval(intervalId);
-  $observationView.className = 'observation-container';
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerBookIcon.className = 'fas fa-book hidden';
   $headerPlusIcon.className = 'fas fa-plus';
   $headerStarIcon.className = 'fas fa-star hidden';
-  $weatherView.className = 'hidden';
   $deleteEntryBtn.className = 'invisible delete-entry';
   $emptystarBtn.className = 'hidden far fa-star';
   $favoriteStarBtn.className = 'hidden fas fa-star';
   $observationTitle.textContent = 'New Observation';
-  observationData.view = 'observation-form';
-  $observationRecordView.className = 'hidden';
-  $favoriteView.className = 'favorite-container hidden';
 }
 
 function bookClick(event) {
   clearInterval(intervalId);
   var $pastObvs = document.querySelector('.past-observations');
-  $observationView.className = 'hidden observation-container';
-  $weatherView.className = 'hidden';
-  $favoriteView.className = 'favorite-container hidden';
-  $observationRecordView.className = 'observation-record';
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerBookIcon.className = 'fas fa-book';
   $headerPlusIcon.className = 'fas fa-plus hidden';
   $headerStarIcon.className = 'fas fa-star hidden';
-  observationData.view = 'observations';
-  observationData.editing = null;
   if (observationData.observations.length === 0) {
     $pastObvs.className = 'past-observations center';
     $pastObvs.textContent = 'No Observations!';
@@ -112,10 +93,6 @@ function starClick(event) {
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerPlusIcon.className = 'fas fa-plus hidden';
   $headerStarIcon.className = 'fas fa-star';
-  $observationRecordView.className = 'hidden';
-  $observationView.className = 'hidden observation-container';
-  $weatherView.className = 'hidden';
-  $favoriteView.className = 'favorite-container';
   intervalId = setInterval(slideShow, 8000);
 }
 function slideShow() {
@@ -341,9 +318,6 @@ function viewEditForm(event) {
   clearInterval(intervalId);
   $favoriteStarBtn.className = 'hidden fa-star';
   $emptystarBtn.className = 'far fa-star';
-  $observationView.className = 'observation-container';
-  $weatherView.className = 'hidden';
-  $observationRecordView.className = 'hidden';
   $observationTitle.textContent = 'Edit Observation';
   $deleteEntryBtn.className = 'delete-entry';
 }
@@ -555,6 +529,37 @@ function renderData() {
   $zipCodeInput.value = null;
   nasaData.image = null;
   spinIcon();
+}
+
+var $tabs = document.querySelectorAll('.tab');
+var $views = document.querySelectorAll('.view');
+
+showView(window.location.hash);
+
+window.addEventListener('hashchange', function (event) {
+  showView(window.location.hash);
+});
+
+function showView(newHash) {
+  var route = newHash.startsWith('#') ? newHash.replace('#', '') : newHash;
+
+  if (route === '') return;
+
+  for (var tabIndex = 0; tabIndex < $tabs.length; tabIndex++) {
+    if ($tabs[tabIndex].hash === newHash) {
+      $tabs[tabIndex].className = 'tab active';
+    } else {
+      $tabs[tabIndex].className = 'tab';
+    }
+  }
+
+  for (var viewIndex = 0; viewIndex < $views.length; viewIndex++) {
+    if ($views[viewIndex].getAttribute('data-view') !== route) {
+      $views[viewIndex].className = 'view hidden';
+    } else {
+      $views[viewIndex].className = 'view';
+    }
+  }
 }
 
 window.addEventListener('DOMContentLoaded', loadObservations);

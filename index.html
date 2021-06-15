@@ -45,8 +45,9 @@
             <i id="star-header" class="fas fa-star hidden"></i>
       </div>
     </header>
+    <div class="container row">
+    <div class = "view" data-view= "weather">
 
-      <div class="container row" data-view="weather">
         <div class="row">
           <div class="column-full">
             <div class="weather-container">
@@ -131,8 +132,9 @@
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="hidden observation-container" data-view="observation-form">
+      <div class="view hidden" data-view="observation-form">
         <div class="column-full">
           <h1 class="observation-title">Observations</h1>
         </div>
@@ -195,7 +197,7 @@
         </form>
       </div>
 
-      <div id="observation-list" class="hidden observation-record" data-view="observations">
+      <div id="observation-list" class="hidden view" data-view="observations">
         <div class="container-form">
           <div class="form-container center-align">
                   <h1 class="past-observations center">Observations</h1>
@@ -214,7 +216,7 @@
               <ul class="list-observations"></ul>
             </div>
 
-      <div class="hidden favorite-container" data-view="favorites">
+      <div class="view hidden" data-view="favorites">
         <div class="container-form">
 
           <div class="favorites-header">
@@ -247,21 +249,41 @@
         <div class="column-full">
           <div class="icon-container">
             <div class = "past-observations">
-              <i id="moon-footer" class="fas fa-cloud-moon"></i>
-              <a href="">Home</a>
+              <a class = "tab active" href="#weather">
+           <span>
+
+             <i id="moon-footer" class="fas fa-cloud-moon"></i>
+          </span>
+
+        </a>
+        <span>Home</span>
             </div>
             <div class = "past-observations">
 
-              <i id="plus-footer" class="fas fa-plus"></i>
-              <a href="">Add Obs.</a>
+              <a class = "tab" href="#observation-form">
+                <span>
+                  <i id="plus-footer" class="fas fa-plus"></i>
+                </span>
+              </a>
+              <span>
+                Add Obs.
+              </span>
             </div>
             <div class = "past-observations">
-              <i id="book-footer" class="fas fa-book"></i>
-              <a href="">Past Obs.</a>
+              <a class = "tab" href="#observations">
+             <span>
+               <i id="book-footer" class="fas fa-book"></i>
+             </span>
+              </a>
+              <span>Past Obs.</span>
             </div>
             <div class = "past-observations">
-              <i id="star-footer" class="fas fa-star"></i>
-              <a href="">Favorites</a>
+              <a class = "tab" href="#favorites">
+              <span>
+                <i id="star-footer" class="fas fa-star"></i>
+              </span>
+                </a>
+              <span>Favorites</span>
             </div>
           </div>
         </div>
