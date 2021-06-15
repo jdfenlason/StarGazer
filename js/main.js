@@ -569,6 +569,7 @@ function renderData() {
   var imageurl = document.querySelector('#user-imageUrl');
   imageurl.value = nasaData.image;
   $imageUrl.setAttribute('src', nasaData.image);
+  $imageUrl.setAttribute('alt', 'api images');
 
   if (nasaData.media_type === 'video') {
     $imageUrl.setAttribute('src', 'images/placeholder.jpeg');

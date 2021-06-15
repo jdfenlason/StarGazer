@@ -389,7 +389,8 @@ textarea:focus {
 .favorite-image-container {
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 50%;
+  height: 50%;
   object-fit: contain;
   align-items: center;
   padding: 0.5rem;
@@ -421,4 +422,8 @@ a {
 
 .warning {
   text-align: center;
+}
+
+.past-observations > span {
+  padding-bottom: 1rem;
 }
