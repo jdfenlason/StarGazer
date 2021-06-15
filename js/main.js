@@ -101,40 +101,40 @@ function starClick(event) {
   $headerStarIcon.className = 'fas fa-star';
   intervalId = setInterval(slideShow, 8000);
 }
+
 function slideShow() {
-  if (
-    observationData.observations[indexCounter].starId &&
-    indexCounter <= observationData.observations.length - 1
-  ) {
-    $favoriteImages.setAttribute(
-      'src',
-      observationData.observations[indexCounter].image
-    );
-    indexCounter++;
+  var data = observationData.observations;
+  var favoritesSlider = data.filter(observations => {
+    return observations.starId;
+  });
+  if (data.length === 0 || favoritesSlider.length === 0) {
+    clearInterval(intervalId);
   }
-  if (indexCounter >= observationData.observations.length) {
+  if (indexCounter <= favoritesSlider.length - 1) {
+    $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
+    indexCounter++;
+  } else {
     indexCounter = 0;
-    $favoriteImages.setAttribute(
-      'src',
-      observationData.observations[indexCounter.image]
-    );
+    $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
+    indexCounter++;
   }
 }
+
 function rightArrowClick(event) {
   clearInterval(intervalId);
-  if (
-    observationData.observations[indexCounter].starId &&
-    indexCounter <= observationData.observations.length - 1
-  ) {
-    $favoriteImages.setAttribute(
-      'src',
-      observationData.observations[indexCounter].image
-    );
-    indexCounter++;
+  var data = observationData.observations;
+  var favoritesSlider = data.filter(observations => {
+    return observations.starId;
+  });
+  if (data.length === 0 || favoritesSlider.length === 0) {
+    clearInterval(intervalId);
   }
-  if (indexCounter >= observationData.observations.length) {
-    indexCounter = 0;
+  if (indexCounter <= favoritesSlider.length - 1) {
+    $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
+    indexCounter++;
   } else {
+    indexCounter = 0;
+    $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
     indexCounter++;
   }
   intervalId = setInterval(slideShow, 8000);
@@ -142,21 +142,24 @@ function rightArrowClick(event) {
 
 function leftArrowClick(event) {
   clearInterval(intervalId);
-  if (indexCounter >= 0 && observationData.observations[indexCounter].starId) {
-    $favoriteImages.setAttribute(
-      'src',
-      observationData.observations[indexCounter].image
-    );
-    indexCounter--;
+  indexCounter--;
+
+  var data = observationData.observations;
+  var favoritesSlider = data.filter(observations => {
+    return observations.starId;
+  });
+  if (data.length === 0 || favoritesSlider.length === 0) {
+    clearInterval(intervalId);
   }
-  if (indexCounter < 0) {
-    indexCounter = observationData.observations.length - 1;
+  if (indexCounter >= 0) {
+    $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
+    indexCounter--;
+  } else {
+    indexCounter = favoritesSlider.length - 1;
     $favoriteImages.setAttribute(
       'src',
-      observationData.observations[indexCounter].image
+      favoritesSlider[indexCounter].image
     );
-  } else {
-    indexCounter--;
   }
   intervalId = setInterval(slideShow, 8000);
 }
@@ -352,6 +355,7 @@ function viewEditForm(event) {
   $favoriteStarBtn.className = 'hidden fa-star';
   $emptystarBtn.className = 'far fa-star';
   $observationTitle.textContent = 'Edit Observation';
+  $warningMessage.textContent = '';
   $deleteEntryBtn.className = 'delete-entry';
 }
 
