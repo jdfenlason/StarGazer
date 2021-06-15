@@ -208,11 +208,18 @@ function saveObvs(event) {
   event.preventDefault();
   if (observationData.editing === null) {
     var userInput = {};
+    userInput.dayLength = astronomyData.dayLength;
     userInput.zipcode = recordObv.elements.zipcode.value;
     userInput.location = recordObv.elements.location.value;
     userInput.date = recordObv.elements.date.value;
     userInput.time = recordObv.elements.time.value;
-    userInput.lunarPhase = recordObv.elements.lunarPhase.value;
+    userInput.lunarPhase = weatherData.moon_phase;
+    userInput.moonrise = weatherData.moonrise;
+    userInput.sunset = weatherData.sunset;
+    userInput.moonDistance = astronomyData.moon_distance;
+    userInput.temp = weatherData.temp;
+    userInput.wind = weatherData.wind;
+    userInput.dayLength = weatherData;
     userInput.image = recordObv.elements.image.value;
     userInput.observations = recordObv.elements.observations.value;
     observationData.observations.unshift(userInput);
@@ -225,7 +232,6 @@ function saveObvs(event) {
     observationData.editing.location = recordObv.elements.location.value;
     observationData.editing.date = recordObv.elements.date.value;
     observationData.editing.time = recordObv.elements.time.value;
-    observationData.editing.lunarPhase = recordObv.elements.lunarPhase.value;
     observationData.editing.image = recordObv.elements.image.value;
     observationData.editing.observations =
       recordObv.elements.observations.value;
@@ -245,7 +251,6 @@ function saveObvs(event) {
   observationData.editing = null;
   bookClick();
 }
-
 function createObservation(entry) {
   var newList = document.createElement('li');
   newList.setAttribute('class', 'observation-entry');
@@ -322,8 +327,6 @@ function editObservationItem(event) {
         recordObv.elements.location.value = observationData.editing.location;
         recordObv.elements.date.value = observationData.editing.date;
         recordObv.elements.time.value = observationData.editing.time;
-        recordObv.elements.lunarPhase.value =
-          observationData.editing.lunarPhase;
         recordObv.elements.image.value = observationData.editing.image;
         $imageUrl.setAttribute('src', observationData.editing.image);
         recordObv.elements.observations.value =
@@ -486,7 +489,7 @@ function getNasaData() {
 
 function renderData() {
   var $zipCodeTitle = document.querySelector('.zip-code-title');
-  $zipCodeTitle.textContent = $zipCodeInput.value;
+  $zipCodeTitle.textContent = weatherData.city;
 
   var zipcode = document.querySelector('#zipcode');
   zipcode.value = weatherData.zipCode;
@@ -540,9 +543,6 @@ function renderData() {
   var time = document.querySelector('#time');
   time.value = weatherData.time;
 
-  var lunarPhase = document.querySelector('#lunarPhase');
-  lunarPhase.value = weatherData.moon_phase;
-
   var imageurl = document.querySelector('#user-imageUrl');
   imageurl.value = nasaData.image;
   $imageUrl.setAttribute('src', nasaData.image);
@@ -556,4 +556,5 @@ function renderData() {
   nasaData.image = null;
   spinIcon();
 }
+
 window.addEventListener('DOMContentLoaded', loadObservations);

@@ -53,7 +53,10 @@
               <div class="weather-title">
                 <h1>Weather</h1>
               </div>
-              <div class="zip-code-title"></div>
+              Location:
+              <div class="zip-code-title">
+                San Diego
+              </div>
               <div class="latitude"></div>
             </div>
           </div>
@@ -70,17 +73,17 @@
                 <span class="time">17:00</span>
                 <br />
                 <h3>Day length:</h3>
-                <span class="dayLength"></span>
+                <span class="dayLength">14 HRS</span>
               </div>
               <div class="card-2">
                 <h3>Temp:</h3>
-                <span class="temp"></span>
+                <span class="temp">78 &deg;</span>
                 <br />
                 <h3>Feels Like:</h3>
-                <span class="feels"></span>
+                <span class="feels">78 &deg;</span>
                 <br />
                 <h3>Wind:</h3>
-                <span class="wind"></span>
+                <span class="wind">14mph</span>
               </div>
             </div>
           </div>
@@ -90,26 +93,26 @@
             <div class="card-container">
               <div class="card-3">
                 <h3>Moonrise:</h3>
-                <span class="moonrise"></span>
+                <span class="moonrise">12:00</span>
                 <br />
 
                 <h3>Sunset:</h3>
-                <span class="sunset"></span>
+                <span class="sunset">18:00</span>
 
                 <br />
                 <h3>Moonset:</h3>
-                <span class="moonset"></span>
+                <span class="moonset">4:00</span>
                 <br />
                 <h3>Moon Distance:</h3>
-                <span class="moon-distance"></span>
+                <span class="moon-distance">151515</span>
 
                 <br />
                 <h3>Lunar Phase:</h3>
-                <span class="moonphase"></span>
+                <span class="moonphase">First Quarter</span>
 
                 <br />
                 <h3>Moon Illumination:</h3>
-                <span class="moonIll"></span>
+                <span class="moonIll">34</span>
               </div>
             </div>
           </div>
@@ -160,18 +163,10 @@
                 id="location"
               />
               <label for="date">Date</label>
-              <input type="text" name="date" placeholder="Date" id="date" />
+              <input type="date" name="date" placeholder="Date" id="date" />
               <label for="time">time</label>
-              <input type="text" name="time" placeholder="Time" id="time" />
-              <label for="lunarPhase">Lunar Phase</label>
-              <input
-                type="text"
-                name="lunarPhase"
-                placeholder="Lunar Phase"
-                id="lunarPhase"
-              />
+              <input type="time" name="time" placeholder="Time" id="time" />
             </div>
-
             <div class="column-full label-container">
               <label for="user-imageUrl">Image URL</label>
               <input
@@ -251,10 +246,23 @@
       <div class="footer-container row">
         <div class="column-full">
           <div class="icon-container">
-            <i id="moon-footer" class="fas fa-cloud-moon"></i>
-            <i id="plus-footer" class="fas fa-plus"></i>
-            <i id="book-footer" class="fas fa-book"></i>
-            <i id="star-footer" class="fas fa-star"></i>
+            <div class = "past-observations">
+              <i id="moon-footer" class="fas fa-cloud-moon"></i>
+              <a href="">Home</a>
+            </div>
+            <div class = "past-observations">
+
+              <i id="plus-footer" class="fas fa-plus"></i>
+              <a href="">Add Obs.</a>
+            </div>
+            <div class = "past-observations">
+              <i id="book-footer" class="fas fa-book"></i>
+              <a href="">Past Obs.</a>
+            </div>
+            <div class = "past-observations">
+              <i id="star-footer" class="fas fa-star"></i>
+              <a href="">Favorites</a>
+            </div>
           </div>
         </div>
       </div>

@@ -348,6 +348,7 @@ textarea:focus {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 .favorites-header {
@@ -407,4 +408,9 @@ textarea:focus {
 #favorites {
   width: 100%;
   height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration-line: none;
 }
