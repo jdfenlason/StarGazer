@@ -427,10 +427,9 @@ a {
 .favorite-image-container {
   display: flex;
   justify-content: center;
-  flex-direction: column;
-  max-width: 50vh;
   align-items: center;
   padding: 0.5rem;
+  flex-direction: column;
 }
 
 .favorite-image-container > span {

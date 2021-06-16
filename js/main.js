@@ -13,7 +13,6 @@ var $footerBookIcon = document.querySelector('#book-footer');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $footerPlusIcon = document.querySelector('#plus-footer');
 var $footerStarIcon = document.querySelector('#star-footer');
-
 var recordObv = document.querySelector('.observation-form');
 
 var $imageUrl = document.querySelector('.image-url');
@@ -85,6 +84,7 @@ function plusClick(event) {
 
 function bookClick(event) {
   clearInterval(intervalId);
+  window.location.hash = '#observations';
   var $pastObvs = document.querySelector('.past-observations');
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerBookIcon.className = 'fas fa-book';
@@ -278,7 +278,7 @@ function createObservation(entry) {
 
   var pdate = document.createElement('p');
   pdate.setAttribute('class', 'post-date');
-  pdate.textContent = `Date ${entry.date}`;
+  pdate.textContent = `Date: ${entry.date}`;
 
   var pTime = document.createElement('p');
   pTime.setAttribute('class', 'post-time');
@@ -286,11 +286,11 @@ function createObservation(entry) {
 
   var pTemp = document.createElement('p');
   pTemp.setAttribute('class', 'post-zip');
-  pTemp.textContent = `Temperature & Wind Dir: ${entry.temp}`;
+  pTemp.textContent = `Temperature: ${entry.temp}`;
 
   var pWind = document.createElement('p');
   pWind.setAttribute('class', 'post-wind');
-  pWind.textContent = `Wind Dir. ${entry.wind}`;
+  pWind.textContent = `Wind Direction: ${entry.wind}`;
 
   var pMoonrise = document.createElement('p');
   pMoonrise.textContent = `Moonrise: ${entry.moonrise}`;
