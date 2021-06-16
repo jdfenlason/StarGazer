@@ -71,6 +71,10 @@ body {
   .header-container > h2 {
     margin-left: 2rem;
   }
+
+  .favorite-image-container {
+    width: 50%;
+  }
 }
 
 @media screen and (max-width: 770px) {

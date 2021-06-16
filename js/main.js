@@ -13,7 +13,6 @@ var $footerBookIcon = document.querySelector('#book-footer');
 var $footerMoonIcon = document.querySelector('#moon-footer');
 var $footerPlusIcon = document.querySelector('#plus-footer');
 var $footerStarIcon = document.querySelector('#star-footer');
-
 var recordObv = document.querySelector('.observation-form');
 
 var $imageUrl = document.querySelector('.image-url');
@@ -53,6 +52,10 @@ $zipCodeInput.addEventListener('keyup', enterZip);
 window.addEventListener('keyup', submit);
 recordObv.addEventListener('submit', saveObvs);
 
+function spinIcon() {
+  $loading.className = 'fas fa-moon invisible';
+}
+
 function moonClick(event) {
   clearInterval(intervalId);
   $headerBookIcon.className = 'fas fa-book hidden';
@@ -81,6 +84,7 @@ function plusClick(event) {
 
 function bookClick(event) {
   clearInterval(intervalId);
+  window.location.hash = '#observations';
   var $pastObvs = document.querySelector('.past-observations');
   $headerMoonIcon.className = 'fas fa-cloud-moon hidden';
   $headerBookIcon.className = 'fas fa-book';
@@ -132,7 +136,7 @@ function rightArrowClick(event) {
   if (data.length === 0 || favoritesSlider.length === 0) {
     clearInterval(intervalId);
   }
-  if (!indexCounter) {
+  if (indexCounter < 0) {
     indexCounter = 0;
   }
   if (indexCounter <= favoritesSlider.length - 1) {
@@ -145,14 +149,13 @@ function rightArrowClick(event) {
   }
   intervalId = setInterval(slideShow, 8000);
 }
-function leftArrowClick(event) {
 
+function leftArrowClick(event) {
   clearInterval(intervalId);
   var data = observationData.observations;
   var favoritesSlider = data.filter(observations => {
     return observations.starId;
   });
-
   if (data.length === 0 || favoritesSlider.length === 0) {
     clearInterval(intervalId);
   }
@@ -161,17 +164,15 @@ function leftArrowClick(event) {
     $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
     indexCounter--;
   }
-  if (indexCounter < 0) {
-    indexCounter = favoritesSlider.length - 1;
-    $favoriteImages.setAttribute(
-      'src',
-      favoritesSlider[indexCounter].image
-    );
+  if (indexCounter >= 0 && indexCounter < favoritesSlider.length) {
+    $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
     indexCounter--;
   } else {
+    indexCounter = favoritesSlider.length - 1;
     $favoriteImages.setAttribute('src', favoritesSlider[indexCounter].image);
     indexCounter--;
   }
+
   intervalId = setInterval(slideShow, 8000);
 }
 
@@ -277,11 +278,19 @@ function createObservation(entry) {
 
   var pdate = document.createElement('p');
   pdate.setAttribute('class', 'post-date');
-  pdate.textContent = `Date & Time: ${entry.date} ${entry.time}`;
+  pdate.textContent = `Date: ${entry.date}`;
+
+  var pTime = document.createElement('p');
+  pTime.setAttribute('class', 'post-time');
+  pTime.textContent = `Time: ${entry.time}`;
 
   var pTemp = document.createElement('p');
   pTemp.setAttribute('class', 'post-zip');
-  pTemp.textContent = `Temp. & Wind: ${entry.temp} ${entry.wind}`;
+  pTemp.textContent = `Temperature: ${entry.temp}`;
+
+  var pWind = document.createElement('p');
+  pWind.setAttribute('class', 'post-wind');
+  pWind.textContent = `Wind Direction: ${entry.wind}`;
 
   var pMoonrise = document.createElement('p');
   pMoonrise.textContent = `Moonrise: ${entry.moonrise}`;
@@ -315,7 +324,9 @@ function createObservation(entry) {
   atag.appendChild(editIcon);
   columnhalf2.appendChild(observationheader);
   columnhalf2.appendChild(pdate);
+  columnhalf2.appendChild(pTime);
   columnhalf2.appendChild(pTemp);
+  columnhalf2.appendChild(pWind);
   columnhalf2.appendChild(pDayLength);
   columnhalf2.appendChild(pSunset);
   columnhalf2.appendChild(pMoonrise);
@@ -437,9 +448,7 @@ function enterZip(event) {
     weatherData.zipCode = $zipCodeInput.value;
   }
 }
-function spinIcon() {
-  $loading.className = 'fas fa-moon invisible';
-}
+
 function submit(event) {
   if (
     event.key === 'Enter' &&
